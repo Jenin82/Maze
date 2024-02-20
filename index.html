@@ -67,11 +67,18 @@
           }
         }
       </style>
-      <script>
+      <!-- <script>
         $(window).load(function () {
           $('#overlay').hide();
         });
-      </script>
+      </script> -->
+	  <script>
+  		window.addEventListener('load', function() {
+    		setTimeout(function() {
+      		document.getElementById('overlay').style.display = 'none';
+    		}, 500); // Hide the overlay after 1000 milliseconds (1 second)
+  		});
+	</script>
   </head>
   <body>
   <div id="overlay">
