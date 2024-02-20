@@ -57,7 +57,7 @@ const SignIn = () => {
 
   return (
     <div className={styles.Wrapper}>
-      <div>
+      <div className={styles.Header}>
         <button>
           <BackArrowsvg />
         </button>
@@ -67,17 +67,23 @@ const SignIn = () => {
         </div>
       </div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="email"
-          placeholder="email address"
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="••••••••"
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-        />
         <div>
+          <p>Email</p>
+          <input
+            type="email"
+            placeholder="email address"
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+          />
+        </div>
+        <div>
+          <p>Password</p>
+          <input
+            type="password"
+            placeholder="••••••••"
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+          />
+        </div>
+        <div className={styles.ForgotPass}>
           <div>
             {" "}
             <input id="remeberme" type="checkbox" />
@@ -93,7 +99,7 @@ const SignIn = () => {
         <a href="/signup">Sign up</a>
       </span>
       <p>OR</p>
-      <button>
+      <button className={styles.Google}>
         <Googlesvg /> <p>Sign in with Google</p>
       </button>
     </div>

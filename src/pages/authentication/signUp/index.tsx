@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 
 import styles from "../Registeration.module.css";
-import { BackArrowsvg } from "../../../assets/svg";
+import { BackArrowsvg, Googlesvg } from "../../../assets/svg";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -56,38 +56,55 @@ const SignUp = () => {
 
   return (
     <div className={styles.Wrapper}>
-      <div>
+      <div className={styles.Header}>
         <button>
           <BackArrowsvg />
         </button>
         <div>
-          <h1>Log In</h1>
-          <p>Please sign in to your existing account</p>
+          <h1>Sign Up</h1>
+          <p>Please sign up to get started</p>
         </div>
       </div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="email"
-          placeholder="email address"
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="••••••••"
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="••••••••"
-          onChange={(e) =>
-            setData({
-              ...data,
-              confirmPassword: e.target.value,
-            })
-          }
-        />
+        <div>
+          <p>Email</p>
+          <input
+            type="email"
+            placeholder="email address"
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+          />
+        </div>
+        <div>
+          <p>Password</p>
+          <input
+            type="password"
+            placeholder="••••••••"
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+          />
+        </div>
+        <div>
+          <p>Re-Type Password</p>
+          <input
+            type="password"
+            placeholder="••••••••"
+            onChange={(e) =>
+              setData({
+                ...data,
+                confirmPassword: e.target.value,
+              })
+            }
+          />
+        </div>
         <button type="submit">Sign Up</button>
       </form>
+      <span>
+        I have an account? &nbsp;
+        <a href="/signin">Sign in</a>
+      </span>
+      <p>OR</p>
+      <button className={styles.Google}>
+        <Googlesvg /> <p>Sign up with Google</p>
+      </button>
     </div>
   );
 };
