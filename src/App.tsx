@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import SignUp from "./pages/authentication/signUp";
 import SignIn from "./pages/authentication/signIn";
 import ProfileCreate from "./pages/authentication/profileCreate";
+import Profile from "./pages/authentication/profile";
 
 function App() {
 	const router = createBrowserRouter([
@@ -32,6 +33,10 @@ function App() {
 		{
 			path: "/profile-create",
 			element: <ProfileCreate/>,
+		},
+		{
+			path: "/profile",
+			element: <Profile/>,
 		},
 		// {
 		// 	path: "/",
