@@ -8,6 +8,7 @@ import SignIn from "./pages/authentication/signIn";
 import ProfileCreate from "./pages/authentication/profileCreate";
 import Profile from "./pages/authentication/profile";
 import NotFound from "./pages/notFound/NotFound";
+import IdeaCreation from "./pages/idea/ideaCreation";
 
 function App() {
 	const router = createBrowserRouter([
@@ -38,6 +39,10 @@ function App() {
 		{
 			path: "/profile",
 			element: <Profile/>,
+		},
+		{
+			path: "/idea-create",
+			element: <IdeaCreation/>,
 		},
 		
 	]);
