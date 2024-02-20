@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../../utils/supabase";
 
-const Profile = () => {
+const 	Profile = () => {
 	const [pic, setPic] = useState("");
 
 	const fetchData = async () => {
@@ -23,6 +23,7 @@ const Profile = () => {
 	return (
 		<div>
 			<div>profile</div>
+			
 			<img src={pic} alt="test" />
 			<div></div>
 		</div>
