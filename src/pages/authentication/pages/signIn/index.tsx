@@ -4,24 +4,31 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../../utils/supabase";
 
-const SignUp = () => {
+const SignIn = () => {
 	const [data, setData] = useState({
 		email: "",
 		password: "",
-		confirmPassword: "",
 	});
 	const navigate = useNavigate();
 
-	const handleSignUp = async () => {
-		let { data: res, error } = await supabase.auth.signUp({
-			email: data.email,
-			password: data.password,
-		});
+	const handleSignIn = async () => {
+		let { data: res, error } = await supabase.auth.signInWithPassword(data);
 		if (error) {
 			throw error.message;
 		} else {
 			localStorage.setItem("user", JSON.stringify(res.session));
-			return res;
+			const { data, error } = await supabase.rpc("get_user_roles", {
+				check_user_id: res.user?.id,
+			});
+			if (error) {
+				throw error.message;
+			} else {
+				const roles = data.map(
+					(role: { role_name: string }) => role.role_name
+				);
+				localStorage.setItem("roles", JSON.stringify(roles));
+				return data;
+			}
 		}
 	};
 
@@ -31,19 +38,15 @@ const SignUp = () => {
 		const isAnyFieldEmpty = Object.values(data).some(
 			(value) => value.trim() === ""
 		);
-		if (data.password !== data.confirmPassword) {
-			toast.error("Passwords do not match.");
-			return;
-		}
 		if (isAnyFieldEmpty) {
 			toast.error("Please fill out all fields.");
 			return;
 		}
 
-		toast.promise(handleSignUp(), {
-			loading: "Signing up...",
+		toast.promise(handleSignIn(), {
+			loading: "Signing in...",
 			success: () => {
-				navigate("/profile-create");
+				navigate("/profile");
 				return <b>Signed in successfully</b>;
 			},
 			error: (error) => {
@@ -55,9 +58,10 @@ const SignUp = () => {
 	return (
 		<div className={styles.signInWrapper}>
 			<div className={styles.signInCard}>
-				<b>Get Started</b>
+				<b>Welcome Back</b>
 				<span>
-					Already have an account? &nbsp;<a href="/signin">Sign in</a>
+					Don&apos;t have an account yet? &nbsp;
+					<a href="/signup">Sign up</a>
 				</span>
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<input
@@ -74,21 +78,11 @@ const SignUp = () => {
 							setData({ ...data, password: e.target.value })
 						}
 					/>
-					<input
-						type="password"
-						placeholder="••••••••"
-						onChange={(e) =>
-							setData({
-								...data,
-								confirmPassword: e.target.value,
-							})
-						}
-					/>
-					<button type="submit">Sign Up</button>
+					<button type="submit">Sign In</button>
 				</form>
 			</div>
 		</div>
 	);
 };
 
-export default SignUp;
+export default SignIn;

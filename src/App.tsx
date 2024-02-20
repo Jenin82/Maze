@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import NotFound from "./pages/notFound";
 import Home from "./pages/home";
 import SignUp from "./pages/authentication/pages/signUp";
+import SignIn from "./pages/authentication/pages/signIn";
 
 function App() {
 	const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
 		{
 			path: "/signup",
 			element: <SignUp />,
+		},
+		{
+			path: "/signin",
+			element: <SignIn />,
 		},
 		// {
 		// 	path: "/",
