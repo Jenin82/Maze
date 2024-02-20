@@ -3,8 +3,9 @@ import "./App.css";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./pages/notFound";
 import Home from "./pages/home";
-import SignUp from "./pages/authentication/pages/signUp";
-import SignIn from "./pages/authentication/pages/signIn";
+import SignUp from "./pages/authentication/signUp";
+import SignIn from "./pages/authentication/signIn";
+import ProfileCreate from "./pages/authentication/profileCreate";
 
 function App() {
 	const router = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
 		{
 			path: "/signin",
 			element: <SignIn />,
+		},
+		{
+			path: "/profile-create",
+			element: <ProfileCreate/>,
 		},
 		// {
 		// 	path: "/",

@@ -1,8 +1,7 @@
 import { useState } from "react";
-import styles from "../index.module.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../../../utils/supabase";
+import { supabase } from "../../../utils/supabase";
 
 const SignIn = () => {
 	const [data, setData] = useState({
@@ -56,8 +55,8 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className={styles.signInWrapper}>
-			<div className={styles.signInCard}>
+		<div >
+			<div >
 				<b>Welcome Back</b>
 				<span>
 					Don&apos;t have an account yet? &nbsp;
