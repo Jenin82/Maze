@@ -1,10 +1,86 @@
-.Wrapper{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.Wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15% 10% 10%;
+  background: url(../../assets/background.png) top center/cover no-repeat
+    rgba(255, 255, 255, 0.8);
+}
+
+.Wrapper .Header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.Wrapper .Header button {
+  background-color: transparent;
+  align-self: flex-start;
+}
+
+.Wrapper form {
+  width: 100%;
+  align-items: flex-start;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Wrapper form > div {
+  width: 100%;
+}
+
+.ForgotPass {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ForgotPass > div {
+  display: flex;
+  height: 17px;
+  font-size: 16px;
+  text-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.ForgotPass button {
+  background-color: transparent;
+  color: #0098ca;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+form> button {
+  width: 100%;
+  background-color: #0098ca;
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 17px;
+}
+
+span a{
+    color: #0098ca;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+}
+.Google{
+    background-color: white;
+    color: black;
     width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: url(../../assets/background.png) top center/cover no-repeat rgba(255,255,255,.8);
+    gap: 10px;
+    font-size: 17px;
 }
 
