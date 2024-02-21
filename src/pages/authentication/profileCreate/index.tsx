@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 
 import styles from "./profilecreate.module.css";
+import { BackArrowsvg } from "../../../assets/svg";
 
 const ProfileCreate = () => {
   const [data, setData] = useState<ProfileCreate>({
@@ -136,82 +137,118 @@ const ProfileCreate = () => {
   return (
     <div className={styles.Wrapper}>
       {page === 0 ? (
-        <div>
-          <h1>What are you?</h1>
-          <select onChange={handleRoleChange} value={role}>
-            <option value="">Select a role</option>
-            <option value="1e16dbb5-f885-4a0e-8593-8ecbcaf5eb3f">
-              Ideator
-            </option>
-            <option value="bfd4a762-c807-4595-ba53-f7afcf1dc49c">
-              Developer
-            </option>
-            <option value="4cd125f5-be3c-41c3-a321-4199dacefc1a">
-              Designer
-            </option>
-          </select>
-          <button
-            onClick={() => {
-              if (!role) {
-                toast.error("Please select a role");
-                return;
-              } else {
-                setPage(1);
-              }
-            }}
-          >
-            Next
+        <>
+          {" "}
+          <button onClick={() => setPage(0)}>
+            <BackArrowsvg />
           </button>
-        </div>
+          <div className={styles.SegmentOne}>
+            <div>
+              <h1>What are you?</h1>
+              <p>Select what describes you the best.</p>
+            </div>
+            <select onChange={handleRoleChange} value={role}>
+              <option value="">Select a role</option>
+              <option value="1e16dbb5-f885-4a0e-8593-8ecbcaf5eb3f">
+                Ideator
+              </option>
+              <option value="bfd4a762-c807-4595-ba53-f7afcf1dc49c">
+                Developer
+              </option>
+              <option value="4cd125f5-be3c-41c3-a321-4199dacefc1a">
+                Designer
+              </option>
+            </select>
+            <button
+              onClick={() => {
+                if (!role) {
+                  toast.error("Please select a role");
+                  return;
+                } else {
+                  setPage(1);
+                }
+              }}
+              className={styles.NextButton}
+            >
+              Continue
+            </button>
+          </div>
+        </>
       ) : page === 1 ? (
-        <div>
-          <input
-            type="text"
-            placeholder="John Doe"
-            onChange={(e) => setData({ ...data, name: e.target.value })}
-            required
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleProfilePicChange}
-            required
-          />
-          <textarea
-            placeholder="Bio"
-            onChange={(e) => setData({ ...data, bio: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter skills"
-            value={newSkill}
-            onChange={(e) => setNewSkill(e.target.value)}
-          />
-          <button type="button" onClick={handleAddSkill}>
-            Add Skill
+        <>
+          <button onClick={() => setPage(0)}>
+            <BackArrowsvg />
           </button>
-          <ul>
-            {data.skills.map((skill, index) => (
-              <li key={index} onClick={() => handleRemoveSkill(index)}>
-                {skill}
-              </li>
-            ))}
-          </ul>
-          <button onClick={() => setPage(0)}>Back</button>
-          <button
-            onClick={() => {
-              if (!data.name || !data.bio || !data.skills.length) {
-                toast.error("Please fill out all fields");
-                return;
-              } else {
-                setPage(2);
-              }
-            }}
-          >
-            Next
-          </button>
-        </div>
+          <div className={styles.SegmentTwo}>
+            <div>
+              <h1>Let’s know you</h1>
+              <p>Complete your profile.</p>
+            </div>
+            <div className={styles.InnerWrap}>
+              <div>
+                <p>Name</p>
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div>
+                <p>Upload Profile</p>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePicChange}
+                  required
+                />
+              </div>
+              <div>
+                <p>Bio</p>
+                <textarea
+                  placeholder="Bio"
+                  onChange={(e) => setData({ ...data, bio: e.target.value })}
+                  required
+                />
+              </div>
+              <div>
+                <p>Skills</p>
+                <div className={styles.SkillInput}>
+                  {" "}
+                  <input
+                    type="text"
+                    placeholder="Enter skills"
+                    value={newSkill}
+                    onChange={(e) => setNewSkill(e.target.value)}
+                  />
+                  <button type="button" onClick={handleAddSkill}>
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>{" "}
+            <div className={styles.List}>
+              {data.skills.map((skill, index) => (
+                <p key={index} onClick={() => handleRemoveSkill(index)}>
+                  {skill}
+                </p>
+              ))}
+            </div>
+            <button
+              onClick={() => {
+                if (!data.name || !data.bio || !data.skills.length) {
+                  toast.error("Please fill out all fields");
+                  return;
+                } else {
+                  setPage(2);
+                }
+              }}
+              className={styles.NextButton}
+            >
+              Continue
+            </button>
+          </div>
+        </>
       ) : (
         <div>
           <h2>Optional fields</h2>
@@ -252,7 +289,9 @@ const ProfileCreate = () => {
             ))}
           </ul>
           <button onClick={() => setPage(1)}>Back</button>
-          <button onClick={handleSubmit}>Update Profile</button>
+          <button onClick={handleSubmit} className={styles.NextButton}>
+            Continue
+          </button>
         </div>
       )}
     </div>
