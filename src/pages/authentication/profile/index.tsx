@@ -51,8 +51,8 @@ const Profile = () => {
 					<div>{data.email}</div>
 					<div>{data.bio}</div>
 					<div>
-						{data.skills.map((skill) => (
-							<div>{skill}</div>
+						{data.skills.map((skill, index) => (
+							<div key={index}>{skill}</div>
 						))}
 					</div>
 				</div>

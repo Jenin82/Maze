@@ -17,7 +17,7 @@ const ProfileCreate = () => {
 
 	const handleCreateUser = async () => {
 		const {
-			data: { user }
+			data: { user },
 		} = await supabase.auth.getUser();
 		if (user) {
 			const { data: response, error } = await supabase
@@ -62,7 +62,7 @@ const ProfileCreate = () => {
 			loading: "Creating your profile...",
 			success: () => {
 				navigate("/");
-				return <b>Profile creation successful</b>;
+				return <b>Profile update successful</b>;
 			},
 			error: (error) => {
 				return <b>{error}</b>;
