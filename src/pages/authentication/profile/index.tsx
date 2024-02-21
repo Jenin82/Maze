@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../../utils/supabase";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 	const [pic, setPic] = useState("");
@@ -10,7 +11,13 @@ const Profile = () => {
 		email: "",
 		bio: "",
 		skills: [],
+		projects: [],
+		linkedin: "",
+		github: "",
+		x: "",
+		muid: "",
 	});
+	const navigate = useNavigate();
 
 	const fetchData = async () => {
 		const {
@@ -54,6 +61,15 @@ const Profile = () => {
 						{data.skills.map((skill, index) => (
 							<div key={index}>{skill}</div>
 						))}
+					</div>
+					<div
+						onClick={() => {
+							supabase.auth.signOut();
+							localStorage.clear();
+							navigate("/signin");
+						}}
+					>
+						Logout
 					</div>
 				</div>
 			)}
