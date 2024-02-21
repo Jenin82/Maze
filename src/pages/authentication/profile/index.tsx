@@ -19,7 +19,7 @@ const Profile = () => {
 		if (user) {
 			const { data } = supabase.storage
 				.from("avatar")
-				.getPublicUrl("avatar_" + user.id + ".jpeg");
+				.getPublicUrl(`avatar_${user.id}.jpeg?timestamp=${Date.now()}`);
 			if (data.publicUrl) {
 				setPic(data.publicUrl);
 				let { data: users, error } = await supabase
