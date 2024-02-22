@@ -34,3 +34,14 @@ interface Idea {
 		name: string;
 	};
 }
+
+interface IdeaUserLink {
+	id: string;
+	idea_id: string;
+	user_id: string;
+	status: string;
+	voted: boolean | null;
+	users: {
+		name: string;
+	};
+}

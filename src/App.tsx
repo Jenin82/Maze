@@ -54,6 +54,10 @@ function App() {
 					element: <Profile />,
 				},
 				{
+					path: "/profile/:id",
+					element: <Profile />,
+				},
+				{
 					path: "/idea-list",
 					element: <IdeaList />,
 				},
