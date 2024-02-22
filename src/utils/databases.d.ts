@@ -4,9 +4,15 @@ interface ProfileCreate {
 	email: string;
 	bio: string;
 	skills: string[];
-	projects: string[];
+	projects: Projects[];
 	linkedin: string;
 	github: string;
 	x: string;
 	muid: string;
+}
+
+interface Projects {
+	name: string;
+	link: string;
+	description: string;
 }
