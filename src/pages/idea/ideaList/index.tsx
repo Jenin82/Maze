@@ -4,6 +4,8 @@ import { RoleCheckerFunction } from "../../../services/RoleChecker";
 import { Roles } from "../../../services/Roles";
 import { supabase } from "../../../utils/supabase";
 import { useNavigate } from "react-router-dom";
+import { Topnav } from "../../../components/navbar/topnav";
+import { Nabvar } from "../../../components/navbar";
 
 const IdeaList = () => {
 	const [data, setData] = useState<Idea[]>([]);
@@ -32,41 +34,55 @@ const IdeaList = () => {
 		fetchData();
 	}, []);
 	return (
-		<div>
-			<h1>Idea</h1>
-			<RoleCheckerFunction roles={[Roles.IDEATOR]}>
-				<div>
-					<button>Create new idea</button>
-				</div>
-			</RoleCheckerFunction>
-			<div>
-				<h2>My idea</h2>
-				{data.map((idea) => (
-					<>
-						{idea.owner_id === user && (
-							<div key={idea.id} onClick={() => {navigate(`/idea/${idea.id}`)}}>
-								<h3>{idea.title}</h3>
-								<p>{idea.description}</p>
-							</div>
-						)}
-					</>
-				))}
-			</div>
-			<div>
-				<h2>Other ideas</h2>
-				{data.map((idea) => (
-					<>
-						{idea.owner_id !== user && (
-							<div key={idea.id} onClick={() => {navigate(`/idea/${idea.id}`)}}>
-								<h3>{idea.title}</h3>
-								<p>{idea.description}</p>
-							</div>
-						)}
-					</>
-				))}
-			</div>
-		</div>
-	);
+    <>
+	<Topnav />
+      <div>
+        <h1>Idea</h1>
+        <RoleCheckerFunction roles={[Roles.IDEATOR]}>
+          <div>
+            <button>Create new idea</button>
+          </div>
+        </RoleCheckerFunction>
+        <div>
+          <h2>My idea</h2>
+          {data.map((idea) => (
+            <>
+              {idea.owner_id === user && (
+                <div
+                  key={idea.id}
+                  onClick={() => {
+                    navigate(`/idea/${idea.id}`);
+                  }}
+                >
+                  <h3>{idea.title}</h3>
+                  <p>{idea.description}</p>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+        <div>
+          <h2>Other ideas</h2>
+          {data.map((idea) => (
+            <>
+              {idea.owner_id !== user && (
+                <div
+                  key={idea.id}
+                  onClick={() => {
+                    navigate(`/idea/${idea.id}`);
+                  }}
+                >
+                  <h3>{idea.title}</h3>
+                  <p>{idea.description}</p>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+	  <Nabvar />
+    </>
+  );
 };
 
 export default IdeaList;

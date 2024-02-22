@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../../utils/supabase";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Topnav } from "../../../components/navbar/topnav";
+import { Nabvar } from "../../../components/navbar";
 
 const Profile = () => {
 	const [pic, setPic] = useState("");
@@ -50,10 +52,11 @@ const Profile = () => {
 
 	return (
 		<>
+		<Topnav />
 			{pic && data && (
 				<div>
 					<div>profile</div>
-					<img src={pic} alt="test" />
+					<img style={{width:"300px"}} src={pic} alt="test" />
 					<div>{data.name}</div>
 					<div>{data.email}</div>
 					<div>{data.bio}</div>
@@ -73,6 +76,7 @@ const Profile = () => {
 					</div>
 				</div>
 			)}
+			<Nabvar />
 		</>
 	);
 };

@@ -1,0 +1,84 @@
+.Wrapper {
+  background: url(../../assets/background2.png) center center/cover no-repeat;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.participants {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10%;
+  gap: 30px;
+}
+
+.participants .InnerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.InnerWrapper .Individual {
+  display: flex;
+  width: 100%;
+  background-color: rgba(41, 228, 253, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+
+.Individual img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: brown;
+  flex-shrink: 0;
+}
+
+.Individual .headerset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
+}
+
+.Individual .headerset h2 {
+  font-size: 19px;
+  font-weight: 600;
+}
+.Individual .headerset h3 {
+  font-size: 16px;
+}
+.Individual .headerset button{
+    background-color: transparent;
+    color: #0098CA;
+}
+
+.Individual .upward{
+    display: flex;
+    gap: 10px;
+}
+
+.Individual .upward .up{
+    border: 2px solid green;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    color: green;
+    background-color: rgba(173, 255, 47,0.2);
+}
+
+.Individual .upward .down{
+    border: 2px solid red;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    color: red;
+    background-color: rgba(255, 47, 47, 0.2);
+}
