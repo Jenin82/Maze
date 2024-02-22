@@ -23,3 +23,11 @@ interface IdeaCreate {
 	description: string;
 	requirements: string[];
 }
+
+interface Idea {
+	id: string;
+	owner_id: string;
+	title: string;
+	description: string;
+	requirements: string[];
+}

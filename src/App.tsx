@@ -12,6 +12,7 @@ import { PrivateRoute } from "./services/PrivateRoutes";
 import { RoleChecker } from "./services/RoleChecker";
 import { Roles } from "./services/Roles";
 import Welcome from "./pages/welcome";
+import IdeaList from "./pages/idea/ideaList";
 
 function App() {
 	const router = createBrowserRouter([
@@ -47,10 +48,13 @@ function App() {
 					path: "/",
 					element: <Home />,
 				},
-
 				{
 					path: "/profile",
 					element: <Profile />,
+				},
+				{
+					path: "/idea-list",
+					element: <IdeaList />,
 				},
 				{
 					path: "/",

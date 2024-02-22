@@ -33,6 +33,24 @@ const IdeaCreation = () => {
 					navigate("/");
 					toast.error("You are not an ideator");
 					throw "You are not an ideator";
+				} else {
+					let { data: idea, error: ideaError } = await supabase
+						.from("idea")
+						.select("*")
+
+						// Filters
+						.eq("owner_id", user.id);
+
+					if (ideaError) {
+						toast.error(ideaError.message);
+						throw ideaError.message;
+					} else if (idea) {
+						if(idea.length > 0) {
+							navigate("/idea-list");
+							toast.error("You already have an idea");
+							throw "You already have an idea";
+						}
+					}
 				}
 			}
 		}
