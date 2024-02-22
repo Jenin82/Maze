@@ -2,7 +2,6 @@ import { ChangeEvent, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
-
 import styles from "./profilecreate.module.css";
 import { BackArrowsvg } from "../../../assets/svg";
 
@@ -23,7 +22,11 @@ const ProfileCreate = () => {
   const [page, setPage] = useState<0 | 1 | 2>(0);
   const navigate = useNavigate();
   const [newSkill, setNewSkill] = useState("");
-  const [newProject, setNewProject] = useState("");
+  const [newProject, setNewProject] = useState<Projects>({
+    name: "",
+    link: "",
+    description: "",
+  });
   const [profilePic, setProfilePic] = useState<File | null>(null);
 
   const handleCreateUser = async () => {
@@ -115,7 +118,7 @@ const ProfileCreate = () => {
       ...data,
       projects: [...data.projects, newProject],
     });
-    setNewProject("");
+    setNewProject({ name: "", link: "", description: "" });
   };
 
   const handleRemoveProject = (index: number) => {
@@ -139,7 +142,7 @@ const ProfileCreate = () => {
       {page === 0 ? (
         <>
           {" "}
-          <button onClick={() => setPage(0)}>
+          <button onClick={() => navigate("/")}>
             <BackArrowsvg />
           </button>
           <div className={styles.SegmentOne}>
@@ -190,7 +193,12 @@ const ProfileCreate = () => {
                 <input
                   type="text"
                   placeholder="John Doe"
-                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      name: e.target.value,
+                    })
+                  }
                   required
                 />
               </div>
@@ -207,7 +215,12 @@ const ProfileCreate = () => {
                 <p>Bio</p>
                 <textarea
                   placeholder="Bio"
-                  onChange={(e) => setData({ ...data, bio: e.target.value })}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      bio: e.target.value,
+                    })
+                  }
                   required
                 />
               </div>
@@ -250,49 +263,94 @@ const ProfileCreate = () => {
           </div>
         </>
       ) : (
-        <div>
-          <h2>Optional fields</h2>
-          <input
-            type="text"
-            placeholder="LinkedIn URL"
-            onChange={(e) => setData({ ...data, linkedin: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Github URL"
-            onChange={(e) => setData({ ...data, github: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="X URL"
-            onChange={(e) => setData({ ...data, x: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="MuLearn ID / MuId"
-            onChange={(e) => setData({ ...data, muid: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Enter Project URL"
-            value={newProject}
-            onChange={(e) => setNewProject(e.target.value)}
-          />
-          <button type="button" onClick={handleAddProject}>
-            Add Project
+        <>
+          <button onClick={() => setPage(0)}>
+            <BackArrowsvg />
           </button>
-          <ul>
-            {data.projects.map((project, index) => (
-              <li key={index} onClick={() => handleRemoveProject(index)}>
-                {project}
-              </li>
-            ))}
-          </ul>
-          <button onClick={() => setPage(1)}>Back</button>
-          <button onClick={handleSubmit} className={styles.NextButton}>
-            Continue
-          </button>
-        </div>
+          <div>
+            <h2>Optional fields</h2>
+            <input
+              type="text"
+              placeholder="LinkedIn URL"
+              onChange={(e) => setData({ ...data, linkedin: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="Github URL"
+              onChange={(e) => setData({ ...data, github: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="X URL"
+              onChange={(e) => setData({ ...data, x: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="MuLearn ID / MuId"
+              onChange={(e) => setData({ ...data, muid: e.target.value })}
+            />
+            <div className={styles.Projects}>
+              <p>Projects</p>
+              <div className={styles.SkillInput}>
+                {" "}
+                <input
+                  type="text"
+                  placeholder="Enter project name"
+                  value={newProject.name}
+                  onChange={(e) =>
+                    setNewProject({
+                      ...newProject,
+                      name: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Enter project URL"
+                  value={newProject.link}
+                  onChange={(e) =>
+                    setNewProject({
+                      ...newProject,
+                      link: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Enter project description"
+                  value={newProject.description}
+                  onChange={(e) =>
+                    setNewProject({
+                      ...newProject,
+                      description: e.target.value,
+                    })
+                  }
+                />
+                <button type="button" onClick={handleAddProject}>
+                  <h1>+</h1>
+                </button>
+              </div>
+            </div>
+            <div className={styles.List}>
+              {data.projects.map((project, index) => (
+                <a
+                  href={project.link}
+                  key={index}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <p onClick={() => handleRemoveProject(index)}>
+                    {project.name}
+                  </p>
+                </a>
+              ))}
+            </div>
+            <button onClick={() => setPage(1)}>Back</button>
+            <button onClick={handleSubmit} className={styles.NextButton}>
+              Continue
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

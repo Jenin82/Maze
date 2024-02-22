@@ -33,7 +33,11 @@ function App() {
 		},
 		{
 			path: "/welcome",
-			element: <Welcome/>,
+			element: <Welcome />,
+		},
+		{
+			path: "/profile-create",
+			element: <ProfileCreate />,
 		},
 		{
 			path: "/",
@@ -43,10 +47,7 @@ function App() {
 					path: "/",
 					element: <Home />,
 				},
-				{
-					path: "/profile-create",
-					element: <ProfileCreate />,
-				},
+
 				{
 					path: "/profile",
 					element: <Profile />,
