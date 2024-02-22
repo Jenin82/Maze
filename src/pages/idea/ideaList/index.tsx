@@ -3,10 +3,12 @@ import toast from "react-hot-toast";
 import { RoleCheckerFunction } from "../../../services/RoleChecker";
 import { Roles } from "../../../services/Roles";
 import { supabase } from "../../../utils/supabase";
+import { useNavigate } from "react-router-dom";
 
 const IdeaList = () => {
 	const [data, setData] = useState<Idea[]>([]);
 	const [user, setUser] = useState("");
+	const navigate = useNavigate();
 
 	const fetchData = async () => {
 		const {
@@ -42,7 +44,7 @@ const IdeaList = () => {
 				{data.map((idea) => (
 					<>
 						{idea.owner_id === user && (
-							<div key={idea.id}>
+							<div key={idea.id} onClick={() => {navigate(`/idea/${idea.id}`)}}>
 								<h3>{idea.title}</h3>
 								<p>{idea.description}</p>
 							</div>
@@ -55,7 +57,7 @@ const IdeaList = () => {
 				{data.map((idea) => (
 					<>
 						{idea.owner_id !== user && (
-							<div key={idea.id}>
+							<div key={idea.id} onClick={() => {navigate(`/idea/${idea.id}`)}}>
 								<h3>{idea.title}</h3>
 								<p>{idea.description}</p>
 							</div>

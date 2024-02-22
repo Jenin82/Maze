@@ -29,5 +29,8 @@ interface Idea {
 	owner_id: string;
 	title: string;
 	description: string;
-	requirements: string[];
+	requirements: string;
+	users: {
+		name: string;
+	};
 }
