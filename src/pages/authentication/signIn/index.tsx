@@ -46,7 +46,7 @@ const SignIn = () => {
     toast.promise(handleSignIn(), {
       loading: "Signing in...",
       success: () => {
-        navigate("/profile");
+        navigate("/");
         return <b>Signed in successfully</b>;
       },
       error: (error) => {

@@ -139,7 +139,7 @@ const ProfileCreate = () => {
       {page === 0 ? (
         <>
           {" "}
-          <button onClick={() => setPage(0)}>
+          <button onClick={() => navigate("/")}>
             <BackArrowsvg />
           </button>
           <div className={styles.SegmentOne}>
