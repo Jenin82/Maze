@@ -90,6 +90,7 @@ const ProfileCreate = () => {
 		toast.promise(handleCreateUser(), {
 			loading: "Creating your profile...",
 			success: () => {
+				localStorage.setItem("roles", JSON.stringify([role]));
 				navigate("/");
 				return <b>Profile update successful</b>;
 			},
