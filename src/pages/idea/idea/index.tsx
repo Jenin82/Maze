@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 
 const Idea = () => {
 	const { id } = useParams();
 	const [data, setData] = useState<Idea>();
 	const [user, setUser] = useState("");
+	const [status, setStatus] = useState("");
+	const [refresh, setRefresh] = useState(false);
+	const [ideaData, setIdeaData] = useState<IdeaUserLink[]>([]);
+	const navigate = useNavigate();
 
 	const fetchData = async () => {
 		const {
@@ -24,15 +28,110 @@ const Idea = () => {
 				throw ideaError.message;
 			} else if (idea) {
 				setData(idea as unknown as Idea);
+				if (idea.owner_id === user.id) {
+					let { data: ideUserLink, error } = await supabase
+						.from("idea_user_link")
+						.select("*, users(name)")
+						.eq("idea_id", id);
+					if (error) {
+						throw error.message;
+					} else if (ideUserLink && ideUserLink.length > 0) {
+						setIdeaData(ideUserLink);
+					}
+				}
+				let { data: idea_user_link, error } = await supabase
+					.from("idea_user_link")
+					.select("status")
+					.eq("idea_id", id)
+					.eq("user_id", user.id);
+				if (error) {
+					throw error.message;
+				} else if (idea_user_link && idea_user_link.length > 0) {
+					setStatus(idea_user_link[0].status);
+				}
 			}
 		}
 	};
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [refresh]);
 
 	const req: string[] = JSON.parse(data?.requirements || "[]");
+
+	const requestContribute = async () => {
+		const { data: res, error: contributeError } = await supabase
+			.from("idea_user_link")
+			.insert([{ idea_id: id, user_id: user, status: "requested" }])
+			.select();
+		if (contributeError) {
+			if (contributeError.message.includes("duplicate key")) {
+				throw "Request already sent";
+			} else {
+				throw contributeError.message;
+			}
+		} else if (res) {
+			return res;
+		}
+	};
+
+	const handleContribute = async () => {
+		toast.promise(requestContribute(), {
+			loading: "Requesting...",
+			success: () => {
+				setStatus("requested");
+				setRefresh(!refresh);
+				return <b>Request sent</b>;
+			},
+			error: (error) => {
+				return <b>{error}</b>;
+			},
+		});
+	};
+
+	const handleAccept = async (ideaUserLink: IdeaUserLink) => {
+		const { data, error } = await supabase
+			.from("idea_user_link")
+			.update({
+				id: ideaUserLink.id,
+				idea_id: ideaUserLink.idea_id,
+				user_id: ideaUserLink.user_id,
+				status: "accepted",
+			})
+			.eq("user_id", ideaUserLink.user_id)
+			.eq("idea_id", ideaUserLink.idea_id)
+			.select();
+		if (error) {
+			toast.error(error.message);
+			throw error.message;
+		} else if (data) {
+			setStatus("accepted");
+			setRefresh(!refresh);
+			return data;
+		}
+	};
+
+	const handleDecline = async (ideaUserLink: IdeaUserLink) => {
+		const { data, error } = await supabase
+			.from("idea_user_link")
+			.update({
+				id: ideaUserLink.id,
+				idea_id: ideaUserLink.idea_id,
+				user_id: ideaUserLink.user_id,
+				status: "rejected",
+			})
+			.eq("user_id", ideaUserLink.user_id)
+			.eq("idea_id", ideaUserLink.idea_id)
+			.select();
+		if (error) {
+			toast.error(error.message);
+			throw error.message;
+		} else if (data) {
+			setStatus("accepted");
+			setRefresh(!refresh);
+			return data;
+		}
+	};
 
 	return (
 		<>
@@ -53,13 +152,62 @@ const Idea = () => {
 							))}
 						</ul>
 					</div>
+					{ideaData.map(
+						(ideaUserLink, index) =>
+							ideaUserLink.status === "accepted" && (
+								<div key={index} onClick={() => navigate(`/profile/${ideaUserLink.user_id}`)}>
+									<img style={{ width: "200px" }}
+										src={
+											"https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
+											ideaUserLink.user_id +
+											".jpeg"
+										}
+										alt={ideaUserLink.users.name}
+									/>
+								</div>
+							)
+					)}
 					{data.owner_id === user ? (
 						<div>
-							<button>request accept decline</button>
+							<h2>request accept decline</h2>
+							{ideaData.map(
+								(ideaUserLink, index) =>
+									ideaUserLink.status === "requested" && (
+										<div key={index}>
+											<div>{ideaUserLink.users.name}</div>
+											<button
+												onClick={() =>
+													handleAccept(ideaUserLink)
+												}
+											>
+												Accept
+											</button>
+											<button
+												onClick={() =>
+													handleDecline(ideaUserLink)
+												}
+											>
+												Decline
+											</button>
+										</div>
+									)
+							)}
 						</div>
 					) : (
 						<div>
-							<button>Contribute</button>
+							{status === "requested" ? (
+								<div>Requested</div>
+							) : status === "rejected" ? (
+								<div>Ideator rejected your request</div>
+							) : status === "accepted" ? (
+								<div></div>
+							) : (
+								<div>
+									<button onClick={handleContribute}>
+										Contribute
+									</button>
+								</div>
+							)}
 						</div>
 					)}
 				</div>
