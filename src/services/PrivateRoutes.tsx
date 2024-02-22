@@ -7,8 +7,9 @@ export const PrivateRoute = () => {
 	const navigate = useNavigate();
 
 	function isEventStarted(): boolean {
-		const eventStartDate = new Date(import.meta.env.VITE_EVENT_START_DATE || "2024-02-23T10:00:00.000Z");
-
+		const eventStartDate = new Date(
+			import.meta.env.VITE_EVENT_START_DATE || "2023-02-23T10:00:00.000Z"
+		);
 		const now = new Date().getTime();
 		const millisecondsSinceStart = now - eventStartDate.getTime();
 		return millisecondsSinceStart >= 0;
