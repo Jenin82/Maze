@@ -1,14 +1,15 @@
 .Wrapper {
-  width:100%;
+  width: 80%;
   background: rgb(255, 255, 255);
-  padding: 12px 10%;
-
+  padding: 12px 5%;
+box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  bottom: 0;
-
+  bottom: 15px;
+  left: 10%;
+  border-radius: 70px;
 }
 
 .Wrapper button {

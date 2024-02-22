@@ -7,80 +7,97 @@ import { useNavigate } from "react-router-dom";
 import { Topnav } from "../../../components/navbar/topnav";
 import { Nabvar } from "../../../components/navbar";
 
+import styles from "./index.module.css";
+import { WhiteStarsvg } from "./svg";
 const IdeaList = () => {
-	const [data, setData] = useState<Idea[]>([]);
-	const [user, setUser] = useState("");
-	const navigate = useNavigate();
+  const [data, setData] = useState<Idea[]>([]);
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
-	const fetchData = async () => {
-		const {
-			data: { user },
-		} = await supabase.auth.getUser();
-		if (user) {
-			setUser(user.id);
-			let { data: idea, error: ideaError } = await supabase
-				.from("idea")
-				.select("*");
-			if (ideaError) {
-				toast.error(ideaError.message);
-				throw ideaError.message;
-			} else if (idea) {
-				setData(idea);
-			}
-		}
-	};
+  const fetchData = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      setUser(user.id);
+      let { data: idea, error: ideaError } = await supabase
+        .from("idea")
+        .select("*");
+      if (ideaError) {
+        toast.error(ideaError.message);
+        throw ideaError.message;
+      } else if (idea) {
+        setData(idea);
+      }
+    }
+  };
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-	return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+  return (
     <>
-	<Topnav />
-      <div>
-        <h1>Idea</h1>
-        <RoleCheckerFunction roles={[Roles.IDEATOR]}>
+      <Topnav />
+      <div className={styles.Wrapper}>
+        <div className={styles.Header}>
+          {" "}
           <div>
-            <button>Create new idea</button>
+            <h1 className={styles.infifty}>
+              IN<span className="colorText">50</span>HRS
+            </h1>
+            <p>Bring your ideas into life!</p>
           </div>
-        </RoleCheckerFunction>
-        <div>
-          <h2>My idea</h2>
-          {data.map((idea) => (
-            <>
-              {idea.owner_id === user && (
-                <div
-                  key={idea.id}
-                  onClick={() => {
-                    navigate(`/idea/${idea.id}`);
-                  }}
-                >
-                  <h3>{idea.title}</h3>
-                  <p>{idea.description}</p>
-                </div>
-              )}
-            </>
-          ))}
+          <RoleCheckerFunction roles={[Roles.IDEATOR]}>
+            <button
+              className={styles.buttonCreate}
+              onClick={() => navigate("/idea-create")}
+            >
+              <WhiteStarsvg /> Create new idea
+            </button>
+          </RoleCheckerFunction>
         </div>
-        <div>
-          <h2>Other ideas</h2>
-          {data.map((idea) => (
-            <>
-              {idea.owner_id !== user && (
-                <div
-                  key={idea.id}
-                  onClick={() => {
-                    navigate(`/idea/${idea.id}`);
-                  }}
-                >
-                  <h3>{idea.title}</h3>
-                  <p>{idea.description}</p>
-                </div>
-              )}
-            </>
-          ))}
+        <div className={styles.ideasWrapper}>
+          <h2>MY IDEAS</h2>
+          <div>
+            {data.map((idea) => (
+              <div>
+                {idea.owner_id === user && (
+                  <div
+                    key={idea.id}
+                    onClick={() => {
+                      navigate(`/idea/${idea.id}`);
+                    }}
+                  >
+                    <h3>{idea.title}</h3>
+                    <p>{idea.description}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.ideasWrapper}>
+          <h2>EXPLORE IDEAS</h2>
+          <div>
+            {data.map((idea) => (
+              <>
+                {idea.owner_id !== user && (
+                  <div
+                    key={idea.id}
+                    onClick={() => {
+                      navigate(`/idea/${idea.id}`);
+                    }}
+                  >
+                    <h3>{idea.title}</h3>
+                    <p>{idea.description}</p>
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
         </div>
       </div>
-	  <Nabvar />
+      <Nabvar />
     </>
   );
 };

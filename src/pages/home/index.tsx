@@ -12,7 +12,12 @@ const Home = () => {
     <div className={styles.Wrapper}>
       <Topnav />
       <div className={styles.participants}>
-        <h1>Participants</h1>
+        <div>
+          <h1 className={styles.infifty}>
+            IN<span className="colorText">50</span>HRS
+          </h1>
+          <h2>Participants</h2>
+        </div>
         <div className={styles.InnerWrapper}>
           <div className={styles.Individual}>
             <img src="" alt="" />
