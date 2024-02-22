@@ -22,11 +22,11 @@ const ProfileCreate = () => {
   const [page, setPage] = useState<0 | 1 | 2>(0);
   const navigate = useNavigate();
   const [newSkill, setNewSkill] = useState("");
-  const [newProject, setNewProject] = useState<Projects>({
-    name: "",
-    link: "",
-    description: "",
-  });
+  // const [newProject, setNewProject] = useState<Projects>({
+  //   name: "",
+  //   link: "",
+  //   description: "",
+  // });
   const [profilePic, setProfilePic] = useState<File | null>(null);
 
   const handleCreateUser = async () => {
@@ -87,17 +87,18 @@ const ProfileCreate = () => {
       return;
     }
 
-    toast.promise(handleCreateUser(), {
-      loading: "Creating your profile...",
-      success: () => {
-        navigate("/");
-        return <b>Profile update successful</b>;
-      },
-      error: (error) => {
-        return <b>{error}</b>;
-      },
-    });
-  };
+		toast.promise(handleCreateUser(), {
+			loading: "Creating your profile...",
+			success: () => {
+				localStorage.setItem("roles", JSON.stringify([role]));
+				navigate("/");
+				return <b>Profile update successful</b>;
+			},
+			error: (error) => {
+				return <b>{error}</b>;
+			},
+		});
+	};
 
   const handleAddSkill = () => {
     setData({
@@ -113,13 +114,13 @@ const ProfileCreate = () => {
     setData({ ...data, skills: updatedSkills });
   };
 
-  const handleAddProject = () => {
-    setData({
-      ...data,
-      projects: [...data.projects, newProject],
-    });
-    setNewProject({ name: "", link: "", description: "" });
-  };
+  // const handleAddProject = () => {
+  //   setData({
+  //     ...data,
+  //     projects: [...data.projects, newProject],
+  //   });
+  //   setNewProject({ name: "", link: "", description: "" });
+  // };
 
   const handleRemoveProject = (index: number) => {
     const updatedProjects = [...data.projects];
@@ -264,10 +265,10 @@ const ProfileCreate = () => {
         </>
       ) : (
         <>
-          <button onClick={() => setPage(0)}>
+          <button onClick={() => setPage(1)}>
             <BackArrowsvg />
           </button>
-          <div>
+          <div className={styles.OptionalFields}>
             <h2>Optional fields</h2>
             <input
               type="text"
@@ -289,7 +290,7 @@ const ProfileCreate = () => {
               placeholder="MuLearn ID / MuId"
               onChange={(e) => setData({ ...data, muid: e.target.value })}
             />
-            <div className={styles.Projects}>
+            {/* <div className={styles.Projects}>
               <p>Projects</p>
               <div className={styles.SkillInput}>
                 {" "}
@@ -330,7 +331,7 @@ const ProfileCreate = () => {
                   <h1>+</h1>
                 </button>
               </div>
-            </div>
+            </div> */}
             <div className={styles.List}>
               {data.projects.map((project, index) => (
                 <a
@@ -345,7 +346,6 @@ const ProfileCreate = () => {
                 </a>
               ))}
             </div>
-            <button onClick={() => setPage(1)}>Back</button>
             <button onClick={handleSubmit} className={styles.NextButton}>
               Continue
             </button>

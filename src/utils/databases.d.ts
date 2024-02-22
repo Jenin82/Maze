@@ -16,3 +16,21 @@ interface Projects {
 	link: string;
 	description: string;
 }
+
+interface IdeaCreate {
+	owner_id: string;
+	title: string;
+	description: string;
+	requirements: string[];
+}
+
+interface Idea {
+	id: string;
+	owner_id: string;
+	title: string;
+	description: string;
+	requirements: string;
+	users: {
+		name: string;
+	};
+}

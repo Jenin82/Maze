@@ -24,7 +24,6 @@
   gap: 30px;
 }
 
-
 .Wrapper .NextButton {
   border-radius: 30px;
   background: #0098ca;
@@ -43,49 +42,54 @@
   text-align: left;
   width: 100%;
 }
-.SegmentTwo .InnerWrap{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 16px;
+.SegmentTwo .InnerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
   width: 100%;
-
 }
 
-.SegmentTwo .SkillInput{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-items: center;
+.SegmentTwo .SkillInput {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
 }
 
-.SegmentTwo .SkillInput input{
-    width: fit-content;
-    min-width: 100px;
+.SegmentTwo .SkillInput input {
+  width: fit-content;
+  min-width: 100px;
 }
 
-.SegmentTwo .SkillInput button{
-    color: #000000;
-    font-weight: 900;
-    font-size: 35px;
-    /* background-color: white; */
-    height: 100%;
-    padding: 0px 10px;
-    border-radius: 50%;
+.SegmentTwo .SkillInput button {
+  color: #000000;
+  font-weight: 900;
+  font-size: 35px;
+  /* background-color: white; */
+  height: 100%;
+  padding: 0px 10px;
+  border-radius: 50%;
 }
 
-.SegmentTwo .List{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.SegmentTwo .List {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.SegmentTwo .List p{
-    background-color: white;
-    padding: 10px ;
-    border-radius: 10px;
-    color: #000000;
-    width: fit-content;
+.SegmentTwo .List p {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  color: #000000;
+  width: fit-content;
+}
+
+.OptionalFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

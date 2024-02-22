@@ -1,0 +1,31 @@
+.Wrapper {
+  width:100%;
+  background: rgb(255, 255, 255);
+  padding: 12px 10%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+
+}
+
+.Wrapper button {
+  background-color: transparent;
+}
+
+.Wrapper button > svg {
+  height: 30px;
+}
+
+.TopnavWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 10%;
+}
+
+.TopnavWrapper button {
+  background-color: transparent;
+}
