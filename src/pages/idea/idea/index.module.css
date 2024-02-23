@@ -1,0 +1,5 @@
+.Wrapper {
+  background: url(../../../assets/background2.png) center center/cover no-repeat;
+  min-height: 100vh;
+  padding: 100px 10%;
+}

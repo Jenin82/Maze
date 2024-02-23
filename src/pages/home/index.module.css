@@ -8,10 +8,10 @@
 	color: #414d59;
 }
 .participants {
-	display: flex;
-	flex-direction: column;
-	padding: 0px 10%;
-	gap: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 10% 80px;
+  gap: 30px;
 }
 
 .participants .InnerWrapper {

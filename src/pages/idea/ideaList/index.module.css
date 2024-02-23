@@ -1,5 +1,5 @@
 .Wrapper {
-  padding: 0px 10% 80px;
+  padding: 100px 10% 80px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -43,4 +43,31 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: 5.22px;
+}
+
+.ideasWrapper .IndividualSets {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+.ideasWrapper .IndividualSets h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.ideasWrapper .IndividualSets p {
+  font-size: 14px;
+  color: #a0a5ba;
+  text-wrap: wrap;
+}
+.ideasWrapper .IndividualSets button {
+  background-color: transparent;
+  color: #0098ca;
+  font-size: 17px;
+}
+
+
+.IndividualSets .Likes{
+    display: flex;
+    gap: 15px;
 }

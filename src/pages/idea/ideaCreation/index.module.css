@@ -1,0 +1,36 @@
+.Wrapper {
+  padding: 100px 10%;
+  background: url(../../../assets/background2.png) center center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.Wrapper .FormContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 15px;
+}
+
+.Wrapper .FormContainer p {
+  font-size: 17px;
+}
+
+.Wrapper .Addbutton {
+  width: fit-content;
+  padding: 10px;
+  font-size: 30px;
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.Wrapper .NextButton {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 17px;
+  background-color: #0098ca;
+}

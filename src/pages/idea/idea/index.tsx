@@ -3,14 +3,18 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 
+import styles from "./index.module.css";
+import { Topnav } from "../../../components/navbar/topnav";
+import { Nabvar } from "../../../components/navbar";
+
 const Idea = () => {
-	const { id } = useParams();
-	const [data, setData] = useState<Idea>();
-	const [user, setUser] = useState("");
-	const [status, setStatus] = useState("");
-	const [refresh, setRefresh] = useState(false);
-	const [ideaData, setIdeaData] = useState<IdeaUserLink[]>([]);
-	const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState<Idea>();
+  const [user, setUser] = useState("");
+  const [status, setStatus] = useState("");
+  const [refresh, setRefresh] = useState(false);
+  const [ideaData, setIdeaData] = useState<IdeaUserLink[]>([]);
+  const navigate = useNavigate();
 
 	const fetchData = async () => {
 		const {
@@ -52,85 +56,85 @@ const Idea = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, [refresh]);
+  useEffect(() => {
+    fetchData();
+  }, [refresh]);
 
-	const req: string[] = JSON.parse(data?.requirements || "[]");
+  const req: string[] = JSON.parse(data?.requirements || "[]");
 
-	const requestContribute = async () => {
-		const { data: res, error: contributeError } = await supabase
-			.from("idea_user_link")
-			.insert([{ idea_id: id, user_id: user, status: "requested" }])
-			.select();
-		if (contributeError) {
-			if (contributeError.message.includes("duplicate key")) {
-				throw "Request already sent";
-			} else {
-				throw contributeError.message;
-			}
-		} else if (res) {
-			return res;
-		}
-	};
+  const requestContribute = async () => {
+    const { data: res, error: contributeError } = await supabase
+      .from("idea_user_link")
+      .insert([{ idea_id: id, user_id: user, status: "requested" }])
+      .select();
+    if (contributeError) {
+      if (contributeError.message.includes("duplicate key")) {
+        throw "Request already sent";
+      } else {
+        throw contributeError.message;
+      }
+    } else if (res) {
+      return res;
+    }
+  };
 
-	const handleContribute = async () => {
-		toast.promise(requestContribute(), {
-			loading: "Requesting...",
-			success: () => {
-				setStatus("requested");
-				setRefresh(!refresh);
-				return <b>Request sent</b>;
-			},
-			error: (error) => {
-				return <b>{error}</b>;
-			},
-		});
-	};
+  const handleContribute = async () => {
+    toast.promise(requestContribute(), {
+      loading: "Requesting...",
+      success: () => {
+        setStatus("requested");
+        setRefresh(!refresh);
+        return <b>Request sent</b>;
+      },
+      error: (error) => {
+        return <b>{error}</b>;
+      },
+    });
+  };
 
-	const handleAccept = async (ideaUserLink: IdeaUserLink) => {
-		const { data, error } = await supabase
-			.from("idea_user_link")
-			.update({
-				id: ideaUserLink.id,
-				idea_id: ideaUserLink.idea_id,
-				user_id: ideaUserLink.user_id,
-				status: "accepted",
-			})
-			.eq("user_id", ideaUserLink.user_id)
-			.eq("idea_id", ideaUserLink.idea_id)
-			.select();
-		if (error) {
-			toast.error(error.message);
-			throw error.message;
-		} else if (data) {
-			setStatus("accepted");
-			setRefresh(!refresh);
-			return data;
-		}
-	};
+  const handleAccept = async (ideaUserLink: IdeaUserLink) => {
+    const { data, error } = await supabase
+      .from("idea_user_link")
+      .update({
+        id: ideaUserLink.id,
+        idea_id: ideaUserLink.idea_id,
+        user_id: ideaUserLink.user_id,
+        status: "accepted",
+      })
+      .eq("user_id", ideaUserLink.user_id)
+      .eq("idea_id", ideaUserLink.idea_id)
+      .select();
+    if (error) {
+      toast.error(error.message);
+      throw error.message;
+    } else if (data) {
+      setStatus("accepted");
+      setRefresh(!refresh);
+      return data;
+    }
+  };
 
-	const handleDecline = async (ideaUserLink: IdeaUserLink) => {
-		const { data, error } = await supabase
-			.from("idea_user_link")
-			.update({
-				id: ideaUserLink.id,
-				idea_id: ideaUserLink.idea_id,
-				user_id: ideaUserLink.user_id,
-				status: "rejected",
-			})
-			.eq("user_id", ideaUserLink.user_id)
-			.eq("idea_id", ideaUserLink.idea_id)
-			.select();
-		if (error) {
-			toast.error(error.message);
-			throw error.message;
-		} else if (data) {
-			setStatus("accepted");
-			setRefresh(!refresh);
-			return data;
-		}
-	};
+  const handleDecline = async (ideaUserLink: IdeaUserLink) => {
+    const { data, error } = await supabase
+      .from("idea_user_link")
+      .update({
+        id: ideaUserLink.id,
+        idea_id: ideaUserLink.idea_id,
+        user_id: ideaUserLink.user_id,
+        status: "rejected",
+      })
+      .eq("user_id", ideaUserLink.user_id)
+      .eq("idea_id", ideaUserLink.idea_id)
+      .select();
+    if (error) {
+      toast.error(error.message);
+      throw error.message;
+    } else if (data) {
+      setStatus("accepted");
+      setRefresh(!refresh);
+      return data;
+    }
+  };
 
 	return (
 		<>

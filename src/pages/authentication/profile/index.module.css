@@ -1,0 +1,103 @@
+.Wrapper {
+  background: url(../../../assets/background2.png) center center/cover no-repeat;
+  min-height: 100vh;
+  padding: 50px 10% 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+.Details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.Details h2 {
+  color: #414d59;
+  text-align: center;
+
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.Details h3 {
+  color: #0098ca;
+  text-align: center;
+  font-family: "SF Pro Rounded";
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 5.22px;
+}
+.SkillsWrapp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.SkillsWrapp > div {
+  background-color: white;
+  width: fit-content;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #a0a5ba;
+}
+.ButtonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.ButtonWrapper button {
+  background-color: transparent;
+}
+.ideasWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.ideasWrapper h2 {
+  color: #0098ca;
+  text-align: center;
+  font-family: "SF Pro Rounded";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 5.22px;
+}
+
+.ideasWrapper .IndividualSets {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  background-color: white;
+  padding: 10px 5px;
+  border-radius: 10px;
+
+}
+.ideasWrapper .IndividualSets h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.ideasWrapper .IndividualSets p {
+  font-size: 14px;
+  color: #a0a5ba;
+  text-wrap: wrap;
+}
+.ideasWrapper .IndividualSets button {
+  background-color: transparent;
+  color: #0098ca;
+  font-size: 17px;
+}
+
+.IndividualSets .Likes {
+  display: flex;
+  gap: 15px;
+}
