@@ -87,20 +87,24 @@ const ProfileCreate = () => {
       return;
     }
 
-		toast.promise(handleCreateUser(), {
-			loading: "Creating your profile...",
-			success: () => {
-				localStorage.setItem("roles", JSON.stringify([role]));
-				navigate("/signin");
-				return <b>Profile update successful</b>;
-			},
-			error: (error) => {
-				return <b>{error}</b>;
-			},
-		});
-	};
+    toast.promise(handleCreateUser(), {
+      loading: "Creating your profile...",
+      success: () => {
+        localStorage.setItem("roles", JSON.stringify([role]));
+        navigate("/signin");
+        return <b>Profile update successful</b>;
+      },
+      error: (error) => {
+        return <b>{error}</b>;
+      },
+    });
+  };
 
   const handleAddSkill = () => {
+    if (newSkill.trim() === "") {
+      toast.error("Please enter a skill.");
+      return;
+    }
     setData({
       ...data,
       skills: [...data.skills, newSkill], // Add the new skill to the skills array
