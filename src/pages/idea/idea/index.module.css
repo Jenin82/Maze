@@ -6,6 +6,7 @@
   flex-direction: column;
   text-align: left;
   gap: 25px;
+  width: 100%;
 }
 
 .Wrapper h1 {
@@ -93,3 +94,4 @@
   padding: 10px 15px;
   border-radius: 15px;
 }
+
