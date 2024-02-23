@@ -1,5 +1,74 @@
 .Wrapper {
-  background: url(../../../assets/background2.png) center center/cover no-repeat;
+  /* background: url(../../../assets/background2.png) center center/cover no-repeat; */
   min-height: 100vh;
   padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 25px;
+}
+
+.Wrapper h1 {
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.Requirement {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Requirement > div {
+  display: flex;
+  gap: 10px;
+}
+
+.Requirement > div p {
+  background-color: white;
+  border: 0.5px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  color: #A0A5BA;
+}
+
+.Requirement img{
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.AddUserForm{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #ededed;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+
+.AddUserForm img{
+  width: 35px;
+  height: 35px;
+  background-color: aquamarine;
+  border-radius: 50%;
+}
+
+.AddUserForm h3{
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.AddUserForm .ButtonContainer{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.AddUserForm .ButtonContainer button{
+  background-color: transparent;
 }

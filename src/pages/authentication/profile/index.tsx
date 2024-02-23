@@ -7,8 +7,7 @@ import { Nabvar } from "../../../components/navbar";
 
 import styles from "./index.module.css";
 import { GitHubsvg, LinkedInsvg, Twittersvg } from "./svg";
-import { Clicksvg } from "../../../assets/svg";
-import { Likesvg, DisLikesvg } from "../../idea/ideaList/svg";
+
 const Profile = () => {
   const [pic, setPic] = useState("");
   const [data, setData] = useState<ProfileCreate>({
@@ -90,44 +89,17 @@ const Profile = () => {
               <GitHubsvg color="#A0A5BA" />
             </button>
           </div>
-          <div className={styles.ideasWrapper}>
-            <h2>EXPLORE IDEAS</h2>
-            <div>
-              <>
-                <div className={styles.IndividualSets}>
-                  <div
-                    onClick={() => {
-                      navigate(`/idea/}`);
-                    }}
-                  >
-                    {" "}
-                    <h3>test</h3>
-                    <p>fsbrbtent</p>
-                    <button>
-                      See More <Clicksvg />
-                    </button>
-                  </div>
-                  <div className={styles.Likes}>
-                    <button>
-                      <Likesvg />
-                    </button>
-                    <button>
-                      <DisLikesvg />
-                    </button>
-                  </div>
-                </div>
-              </>
-            </div>
-          </div>
-          {/* <div
+          
+        <div
             onClick={() => {
               supabase.auth.signOut();
               localStorage.clear();
               navigate("/signin");
             }}
+            className={styles.Logout}
           >
             Logout
-          </div> */}
+          </div> 
         </div>
       )}
       <Nabvar />

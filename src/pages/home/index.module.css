@@ -37,6 +37,7 @@
 	border-radius: 50%;
 	background-color: brown;
 	flex-shrink: 0;
+	object-fit: cover;
 }
 
 .Individual .headerset {

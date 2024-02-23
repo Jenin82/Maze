@@ -101,3 +101,12 @@
   display: flex;
   gap: 15px;
 }
+
+
+.Logout{
+  width: 100%;
+  background-color: #0098ca;
+  padding: 15px;
+  color: white;
+  border-radius: 30px;
+}
