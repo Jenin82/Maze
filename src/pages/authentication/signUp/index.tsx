@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 
 import styles from "../Registeration.module.css";
-import { BackArrowsvg, Googlesvg } from "../../../assets/svg";
+import { BackArrowsvg } from "../../../assets/svg";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -101,10 +101,10 @@ const SignUp = () => {
         I have an account? &nbsp;
         <a href="/signin">Sign in</a>
       </span>
-      <p>OR</p>
+      {/* <p>OR</p>
       <button className={styles.Google}>
         <Googlesvg /> <p>Sign up with Google</p>
-      </button>
+      </button> */}
     </div>
   );
 };
