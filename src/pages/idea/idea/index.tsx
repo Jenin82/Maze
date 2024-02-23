@@ -137,105 +137,140 @@ const Idea = () => {
   };
 
   return (
-    <>
-      <Topnav />
-      {data && ideaData && (
-        <div className={styles.Wrapper}>
-          <div>
-            {" "}
-            <h1>
-              Title : <span className="colorText">{data.title}</span>
-            </h1>
-            <h2>By : {data.users.name}</h2>
-          </div>
-          <div>
-            Description:
-            <br />
-            {data.description}
-          </div>
-          <div className={styles.Requirement}>
-            <h2>Requirements</h2>
-            <div>
-              {req.map((requirement, index) => (
-                <p key={index}>{requirement}</p>
-              ))}
-            </div>
-          </div>
-          <div className={styles.Requirement}>
-            <h2>Contributors</h2>
-            <div>
-              {" "}
-              {ideaData.map(
-                (ideaUserLink, index) =>
-                  ideaUserLink.status === "accepted" && (
-                    <div
-                      key={index}
-                      onClick={() =>
-                        navigate(`/profile/${ideaUserLink.user_id}`)
-                      }
-                    >
-                      <img
-                        src={
-                          "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
-                          ideaUserLink.user_id +
-                          ".jpeg"
-                        }
-                        alt={ideaUserLink.users.name}
-                      />
-                    </div>
-                  )
-              )}
-            </div>
-          </div>
-          {data.owner_id === user ? (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <h2>Requested Contributors</h2>
-              {ideaData.map(
-                (ideaUserLink, index) =>
-                  ideaUserLink.status === "requested" && (
-                    <div key={index} className={styles.AddUserForm}>
-                      <img src="" alt="" />
-                      <h3>{ideaUserLink.users.name}</h3>
-                      <div className={styles.ButtonContainer}>
-                        <button onClick={() => handleAccept(ideaUserLink)}>
-                          <Ticksvg />
-                        </button>
-                        <button onClick={() => handleDecline(ideaUserLink)}>
-                          <Crosssvg />
-                        </button>
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-          ) : (
-            <div>
-              {status === "requested" ? (
-                <div className={styles.RequestedStyle}>Requested</div>
-              ) : status === "rejected" ? (
-                <div className={styles.RegectedStyle}>
-                  Ideator rejected your request
-                </div>
-              ) : status === "accepted" ? (
-                <div></div>
-              ) : (
-                <div>
-                  <button
-                    onClick={handleContribute}
-                    className={styles.ContributeBtn}
-                  >
-                    Contribute
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-      <Nabvar />
-    </>
+		<>
+			<Topnav />
+			{data && ideaData && (
+				<div className={styles.Wrapper}>
+					<div>
+						{" "}
+						<h1>
+							Title :{" "}
+							<span className="colorText">{data.title}</span>
+						</h1>
+						<h2>By : {data.users.name}</h2>
+					</div>
+					<div>
+						Description:
+						<br />
+						{data.description}
+					</div>
+					<div className={styles.Requirement}>
+						<h2>Requirements</h2>
+						<div>
+							{req.map((requirement, index) => (
+								<p key={index}>{requirement}</p>
+							))}
+						</div>
+					</div>
+					<div className={styles.Requirement}>
+						<h2>Contributors</h2>
+						<div>
+							{" "}
+							{ideaData.map(
+								(ideaUserLink, index) =>
+									ideaUserLink.status === "accepted" && (
+										<div
+											key={index}
+											onClick={() =>
+												navigate(
+													`/profile/${ideaUserLink.user_id}`
+												)
+											}
+										>
+											<img
+												src={
+													"https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
+													ideaUserLink.user_id +
+													".jpeg"
+												}
+												alt={ideaUserLink.users.name}
+											/>
+										</div>
+									)
+							)}
+						</div>
+					</div>
+					{data.owner_id === user ? (
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								gap: "10px",
+							}}
+						>
+							<h2>Requested Contributors</h2>
+							{ideaData.map(
+								(ideaUserLink, index) =>
+									ideaUserLink.status === "requested" && (
+										<div
+											key={index}
+											className={styles.AddUserForm}
+										>
+											<img
+												src={
+													"https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
+													ideaUserLink.user_id +
+													".jpeg"
+												}
+												alt={ideaUserLink.users.name}
+											/>
+											<h3>{ideaUserLink.users.name}</h3>
+											<div
+												className={
+													styles.ButtonContainer
+												}
+											>
+												<button
+													onClick={() =>
+														handleAccept(
+															ideaUserLink
+														)
+													}
+												>
+													<Ticksvg />
+												</button>
+												<button
+													onClick={() =>
+														handleDecline(
+															ideaUserLink
+														)
+													}
+												>
+													<Crosssvg />
+												</button>
+											</div>
+										</div>
+									)
+							)}
+						</div>
+					) : (
+						<div>
+							{status === "requested" ? (
+								<div className={styles.RequestedStyle}>
+									Requested
+								</div>
+							) : status === "rejected" ? (
+								<div className={styles.RegectedStyle}>
+									Ideator rejected your request
+								</div>
+							) : status === "accepted" ? (
+								<div></div>
+							) : (
+								<div>
+									<button
+										onClick={handleContribute}
+										className={styles.ContributeBtn}
+									>
+										Contribute
+									</button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+			)}
+			<Nabvar />
+		</>
   );
 };
 

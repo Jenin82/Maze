@@ -25,6 +25,7 @@ interface IdeaCreate {
 }
 
 interface Idea {
+	idea_user_link: any;
 	id: string;
 	owner_id: string;
 	title: string;
