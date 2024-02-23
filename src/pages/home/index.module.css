@@ -10,7 +10,7 @@
 .participants {
   display: flex;
   flex-direction: column;
-  padding: 0px 10%;
+  padding: 100px 10% 80px;
   gap: 30px;
 }
 

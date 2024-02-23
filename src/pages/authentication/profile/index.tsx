@@ -5,80 +5,134 @@ import { useNavigate } from "react-router-dom";
 import { Topnav } from "../../../components/navbar/topnav";
 import { Nabvar } from "../../../components/navbar";
 
+import styles from "./index.module.css";
+import { GitHubsvg, LinkedInsvg, Twittersvg } from "./svg";
+import { Clicksvg } from "../../../assets/svg";
+import { Likesvg, DisLikesvg } from "../../idea/ideaList/svg";
 const Profile = () => {
-	const [pic, setPic] = useState("");
-	const [data, setData] = useState<ProfileCreate>({
-		id: "",
-		name: "",
-		email: "",
-		bio: "",
-		skills: [],
-		projects: [],
-		linkedin: "",
-		github: "",
-		x: "",
-		muid: "",
-	});
-	const navigate = useNavigate();
+  const [pic, setPic] = useState("");
+  const [data, setData] = useState<ProfileCreate>({
+    id: "",
+    name: "",
+    email: "",
+    bio: "",
+    skills: [],
+    projects: [],
+    linkedin: "",
+    github: "",
+    x: "",
+    muid: "",
+  });
+  const navigate = useNavigate();
 
-	const fetchData = async () => {
-		const {
-			data: { user },
-		} = await supabase.auth.getUser();
-		if (user) {
-			const { data } = supabase.storage
-				.from("avatar")
-				.getPublicUrl(`avatar_${user.id}.jpeg?timestamp=${Date.now()}`);
-			if (data.publicUrl) {
-				setPic(data.publicUrl);
-				let { data: users, error } = await supabase
-					.from("users")
-					.select("*")
-					.eq("id", user.id);
-				if (error) {
-					toast.error(error.message);
-					throw error.message;
-				} else if (users) {
-					setData(users[0]);
-					return users[0];
-				}
-			}
-		}
-	};
+  const fetchData = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const { data } = supabase.storage
+        .from("avatar")
+        .getPublicUrl(`avatar_${user.id}.jpeg?timestamp=${Date.now()}`);
+      if (data.publicUrl) {
+        setPic(data.publicUrl);
+        let { data: users, error } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", user.id);
+        if (error) {
+          toast.error(error.message);
+          throw error.message;
+        } else if (users) {
+          setData(users[0]);
+          return users[0];
+        }
+      }
+    }
+  };
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-
-	return (
-		<>
-		<Topnav />
-			{pic && data && (
-				<div>
-					<div>profile</div>
-					<img style={{width:"300px"}} src={pic} alt="test" />
-					<div>{data.name}</div>
-					<div>{data.email}</div>
-					<div>{data.bio}</div>
-					<div>
-						{data.skills.map((skill, index) => (
-							<div key={index}>{skill}</div>
-						))}
-					</div>
-					<div
-						onClick={() => {
-							supabase.auth.signOut();
-							localStorage.clear();
-							navigate("/signin");
-						}}
-					>
-						Logout
-					</div>
-				</div>
-			)}
-			<Nabvar />
-		</>
-	);
+  useEffect(() => {
+    fetchData();
+  }, []);
+  return (
+    <>
+      <Topnav />
+      {pic && data && (
+        <div className={styles.Wrapper}>
+          <img
+            style={{
+              width: "130px",
+              height: "130px",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+            src={pic}
+            alt="test"
+          />
+          <div className={styles.Details}>
+            {" "}
+            <h2>{data.name}</h2>
+            <p>{data.bio}</p>
+            <h3>IDEATOR</h3>
+          </div>
+          <div className={styles.SkillsWrapp}>
+            {data.skills.map((skill, index) => (
+              <div key={index}>{skill}</div>
+            ))}
+          </div>
+          <div className={styles.ButtonWrapper}>
+            <button>
+              <LinkedInsvg color="#0098CA" />
+            </button>
+            <button>
+              <Twittersvg color="#A0A5BA" />
+            </button>
+            <button>
+              <GitHubsvg color="#A0A5BA" />
+            </button>
+          </div>
+          <div className={styles.ideasWrapper}>
+            <h2>EXPLORE IDEAS</h2>
+            <div>
+              <>
+                <div className={styles.IndividualSets}>
+                  <div
+                    onClick={() => {
+                      navigate(`/idea/}`);
+                    }}
+                  >
+                    {" "}
+                    <h3>test</h3>
+                    <p>fsbrbtent</p>
+                    <button>
+                      See More <Clicksvg />
+                    </button>
+                  </div>
+                  <div className={styles.Likes}>
+                    <button>
+                      <Likesvg />
+                    </button>
+                    <button>
+                      <DisLikesvg />
+                    </button>
+                  </div>
+                </div>
+              </>
+            </div>
+          </div>
+          {/* <div
+            onClick={() => {
+              supabase.auth.signOut();
+              localStorage.clear();
+              navigate("/signin");
+            }}
+          >
+            Logout
+          </div> */}
+        </div>
+      )}
+      <Nabvar />
+    </>
+  );
 };
 
 export default Profile;

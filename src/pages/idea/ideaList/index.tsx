@@ -8,7 +8,8 @@ import { Topnav } from "../../../components/navbar/topnav";
 import { Nabvar } from "../../../components/navbar";
 
 import styles from "./index.module.css";
-import { WhiteStarsvg } from "./svg";
+import { DisLikesvg, Likesvg, WhiteStarsvg } from "./svg";
+import { Clicksvg } from "../../../assets/svg";
 const IdeaList = () => {
   const [data, setData] = useState<Idea[]>([]);
   const [user, setUser] = useState("");
@@ -62,14 +63,27 @@ const IdeaList = () => {
             {data.map((idea) => (
               <div>
                 {idea.owner_id === user && (
-                  <div
-                    key={idea.id}
-                    onClick={() => {
-                      navigate(`/idea/${idea.id}`);
-                    }}
-                  >
-                    <h3>{idea.title}</h3>
-                    <p>{idea.description}</p>
+                  <div key={idea.id} className={styles.IndividualSets}>
+                    <div
+                      onClick={() => {
+                        navigate(`/idea/${idea.id}`);
+                      }}
+                    >
+                      {" "}
+                      <h3>{idea.title}</h3>
+                      <p>{idea.description}</p>
+                      <button>
+                        See More <Clicksvg />
+                      </button>
+                    </div>
+                    <div className={styles.Likes}>
+                      <button>
+                        <Likesvg />
+                      </button>
+                      <button>
+                        <DisLikesvg />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -82,14 +96,27 @@ const IdeaList = () => {
             {data.map((idea) => (
               <>
                 {idea.owner_id !== user && (
-                  <div
-                    key={idea.id}
-                    onClick={() => {
-                      navigate(`/idea/${idea.id}`);
-                    }}
-                  >
-                    <h3>{idea.title}</h3>
-                    <p>{idea.description}</p>
+                  <div key={idea.id} className={styles.IndividualSets}>
+                    <div
+                      onClick={() => {
+                        navigate(`/idea/${idea.id}`);
+                      }}
+                    >
+                      {" "}
+                      <h3>{idea.title}</h3>
+                      <p>{idea.description}</p>
+                      <button>
+                        See More <Clicksvg />
+                      </button>
+                    </div>
+                    <div className={styles.Likes}>
+                      <button>
+                        <Likesvg />
+                      </button>
+                      <button>
+                        <DisLikesvg />
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
