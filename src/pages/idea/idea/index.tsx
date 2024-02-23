@@ -28,16 +28,15 @@ const Idea = () => {
 				throw ideaError.message;
 			} else if (idea) {
 				setData(idea as unknown as Idea);
-				if (idea.owner_id === user.id) {
-					let { data: ideUserLink, error } = await supabase
+				let { data: ideUserLink, error: ideaUserLinkError } =
+					await supabase
 						.from("idea_user_link")
 						.select("*, users(name)")
 						.eq("idea_id", id);
-					if (error) {
-						throw error.message;
-					} else if (ideUserLink && ideUserLink.length > 0) {
-						setIdeaData(ideUserLink);
-					}
+				if (ideaUserLinkError) {
+					throw ideaUserLinkError.message;
+				} else if (ideUserLink && ideUserLink.length > 0) {
+					setIdeaData(ideUserLink);
 				}
 				let { data: idea_user_link, error } = await supabase
 					.from("idea_user_link")
@@ -135,7 +134,7 @@ const Idea = () => {
 
 	return (
 		<>
-			{data && (
+			{data && ideaData && (
 				<div>
 					<h1>{data.title}</h1>
 					<div>{data.users.name}</div>
@@ -155,8 +154,16 @@ const Idea = () => {
 					{ideaData.map(
 						(ideaUserLink, index) =>
 							ideaUserLink.status === "accepted" && (
-								<div key={index} onClick={() => navigate(`/profile/${ideaUserLink.user_id}`)}>
-									<img style={{ width: "200px" }}
+								<div
+									key={index}
+									onClick={() =>
+										navigate(
+											`/profile/${ideaUserLink.user_id}`
+										)
+									}
+								>
+									<img
+										style={{ width: "200px" }}
 										src={
 											"https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
 											ideaUserLink.user_id +

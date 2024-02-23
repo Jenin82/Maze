@@ -45,3 +45,21 @@ interface IdeaUserLink {
 		name: string;
 	};
 }
+
+interface ProfileData {
+	id: string;
+	name: string;
+	email: string;
+	bio: string;
+	skills: string[];
+	projects: Projects[];
+	linkedin: string;
+	github: string;
+	x: string;
+	muid: string;
+	user_role_link: {
+		roles: {
+			name: string;
+		}
+	};
+}
