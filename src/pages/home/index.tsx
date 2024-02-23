@@ -7,11 +7,13 @@ import styles from "./index.module.css";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { supabase } from "../../utils/supabase";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 	const [refresh, setRefresh] = useState(false);
 	const [data, setData] = useState<ProfileData[]>([]);
 	const [user, setUser] = useState("");
+	const navigate = useNavigate();
 
 	const fetchData = async () => {
 		const {
@@ -147,7 +149,7 @@ const Home = () => {
 								<div className={styles.headerset}>
 									<h2>{user.name}</h2>
 									<h3>{user.user_role_link.roles.name}</h3>
-									<button>
+									<button onClick={() => navigate(`/profile/${user.id}`)}>
 										See More <Clicksvg />
 									</button>
 								</div>
