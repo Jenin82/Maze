@@ -51,7 +51,7 @@
   display: flex;
   justify-content: space-around;
 }
-.ButtonWrapper button {
+.ButtonWrapper a {
   background-color: transparent;
 }
 .ideasWrapper {
