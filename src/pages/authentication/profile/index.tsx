@@ -41,7 +41,7 @@ const Profile = () => {
 				} else {
 					let { data: users, error } = await supabase
 						.from("users")
-						.select("*")
+						.select("*, user_role_link(*,roles(*))")
 						.eq("id", user.id);
 					if (error) {
 						toast.error(error.message);
