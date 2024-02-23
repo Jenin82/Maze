@@ -4,11 +4,13 @@
   flex-direction: column;
   gap: 30px;
 }
+
 .Wrapper .Header {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+
 .Wrapper h1 {
   font-size: 50px;
   line-height: 1;
@@ -53,15 +55,18 @@
   margin: 10px 0px;
   padding: 5px;
 }
+
 .ideasWrapper .IndividualSets h3 {
   font-size: 18px;
   font-weight: 500;
 }
+
 .ideasWrapper .IndividualSets p {
   font-size: 14px;
   color: #a0a5ba;
   text-wrap: wrap;
 }
+
 .ideasWrapper .IndividualSets button {
   background-color: transparent;
   color: #0098ca;
@@ -69,7 +74,25 @@
 }
 
 
-.IndividualSets .Likes{
-    display: flex;
-    gap: 15px;
+.IndividualSets .Likes {
+  display: flex;
+  gap: 15px;
+}
+
+.ideasWrapper .SearchField {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-left: 10px
+}
+
+.ideasWrapper .SearchField input {
+  border: none !important;
+  outline: none !important;
+  width: 100%;
+  padding: 10px;
 }

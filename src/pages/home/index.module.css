@@ -2,22 +2,42 @@
 	min-height: 100vh;
 	padding-bottom: 80px;
 }
+
 .Wrapper .infifty {
 	font-weight: 800;
 	font-size: 50px;
 	color: #414d59;
 }
+
 .participants {
-  display: flex;
-  flex-direction: column;
-  padding: 100px 10% 80px;
-  gap: 30px;
+	display: flex;
+	flex-direction: column;
+	padding: 100px 10% 80px;
+	gap: 30px;
 }
 
 .participants .InnerWrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+}
+
+.participants .SearchField {
+	width: 100%;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding-left: 10px
+}
+
+.participants .SearchField input {
+	border: none !important;
+	outline: none !important;
+	width: 100%;
+	padding: 10px;
 }
 
 .InnerWrapper .Individual {
@@ -52,11 +72,13 @@
 	font-size: 19px;
 	font-weight: 500;
 }
+
 .Individual .headerset h3 {
 	font-size: 15px;
 	font-weight: 400;
 	text-transform: uppercase;
 }
+
 .Individual .headerset button {
 	background-color: transparent;
 	color: #0098ca;

@@ -23,6 +23,7 @@
 .Requirement > div {
 	display: flex;
 	gap: 10px;
+	flex-wrap: wrap;
 }
 
 .Requirement > div p {
