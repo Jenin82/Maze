@@ -50,10 +50,12 @@
   justify-content: space-between;
   align-items: center;
   text-align: left;
+  margin: 10px 0px;
+  padding: 5px;
 }
 .ideasWrapper .IndividualSets h3 {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
 }
 .ideasWrapper .IndividualSets p {
   font-size: 14px;

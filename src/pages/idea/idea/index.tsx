@@ -143,7 +143,9 @@ const Idea = () => {
         <div className={styles.Wrapper}>
           <div>
             {" "}
-            <h1>Title : {data.title}</h1>
+            <h1>
+              Title : <span className="colorText">{data.title}</span>
+            </h1>
             <h2>By : {data.users.name}</h2>
           </div>
           <div>
@@ -186,7 +188,9 @@ const Idea = () => {
             </div>
           </div>
           {data.owner_id === user ? (
-            <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
               <h2>Requested Contributors</h2>
               {ideaData.map(
                 (ideaUserLink, index) =>
@@ -195,7 +199,6 @@ const Idea = () => {
                       <img src="" alt="" />
                       <h3>{ideaUserLink.users.name}</h3>
                       <div className={styles.ButtonContainer}>
-                   
                         <button onClick={() => handleAccept(ideaUserLink)}>
                           <Ticksvg />
                         </button>
@@ -210,14 +213,21 @@ const Idea = () => {
           ) : (
             <div>
               {status === "requested" ? (
-                <div>Requested</div>
+                <div className={styles.RequestedStyle}>Requested</div>
               ) : status === "rejected" ? (
-                <div>Ideator rejected your request</div>
+                <div className={styles.RegectedStyle}>
+                  Ideator rejected your request
+                </div>
               ) : status === "accepted" ? (
                 <div></div>
               ) : (
                 <div>
-                  <button onClick={handleContribute}>Contribute</button>
+                  <button
+                    onClick={handleContribute}
+                    className={styles.ContributeBtn}
+                  >
+                    Contribute
+                  </button>
                 </div>
               )}
             </div>

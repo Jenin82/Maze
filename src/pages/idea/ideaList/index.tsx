@@ -8,6 +8,8 @@ import { Nabvar } from "../../../components/navbar";
 import styles from "./index.module.css";
 import { DisLikesvg, Likesvg, WhiteStarsvg } from "./svg";
 import { Clicksvg } from "../../../assets/svg";
+import { RoleCheckerFunction } from "../../../services/RoleChecker";
+import { Roles } from "../../../services/Roles";
 const IdeaList = () => {
 	const [data, setData] = useState<Idea[]>([]);
 	const [user, setUser] = useState("");
@@ -31,104 +33,100 @@ const IdeaList = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-	return (
-		<>
-			<Topnav />
-			<div className={styles.Wrapper}>
-				<div className={styles.Header}>
-					{" "}
-					<div>
-						<h1 className={styles.infifty}>
-							IN<span className="colorText">50</span>HRS
-						</h1>
-						<p>Bring your ideas into life!</p>
-					</div>
-					<button
-						className={styles.buttonCreate}
-						onClick={() => navigate("/idea-create")}
-					>
-						<WhiteStarsvg /> Create new idea
-					</button>
-				</div>
-				<div className={styles.ideasWrapper}>
-					<h2>MY IDEAS</h2>
-					<div>
-						{data.map((idea) => (
-							<div>
-								{idea.owner_id === user && (
-									<div
-										key={idea.id}
-										className={styles.IndividualSets}
-									>
-										<div
-											onClick={() => {
-												navigate(`/idea/${idea.id}`);
-											}}
-										>
-											{" "}
-											<h3>{idea.title}</h3>
-											<p>{idea.description}</p>
-											<button>
-												See More <Clicksvg />
-											</button>
-										</div>
-										<div className={styles.Likes}>
-											<button>
-												<Likesvg />
-											</button>
-											<button>
-												<DisLikesvg />
-											</button>
-										</div>
-									</div>
-								)}
-							</div>
-						))}
-					</div>
-				</div>
-				<div className={styles.ideasWrapper}>
-					<h2>EXPLORE IDEAS</h2>
-					<div>
-						{data.map((idea) => (
-							<>
-								{idea.owner_id !== user && (
-									<div
-										key={idea.id}
-										className={styles.IndividualSets}
-									>
-										<div
-											onClick={() => {
-												navigate(`/idea/${idea.id}`);
-											}}
-										>
-											{" "}
-											<h3>{idea.title}</h3>
-											<p>{idea.description}</p>
-											<button>
-												See More <Clicksvg />
-											</button>
-										</div>
-										<div className={styles.Likes}>
-											<button>
-												<Likesvg />
-											</button>
-											<button>
-												<DisLikesvg />
-											</button>
-										</div>
-									</div>
-								)}
-							</>
-						))}
-					</div>
-				</div>
-			</div>
-			<Nabvar />
-		</>
-	);
+  useEffect(() => {
+    fetchData();
+  }, []);
+  return (
+    <>
+      <Topnav />
+      <div className={styles.Wrapper}>
+        <div className={styles.Header}>
+          {" "}
+          <div>
+            <h1 className={styles.infifty}>
+              IN<span className="colorText">50</span>HRS
+            </h1>
+            <p>Bring your ideas into life!</p>
+          </div>
+          <RoleCheckerFunction roles={[Roles.IDEATOR]}>
+            <button
+              className={styles.buttonCreate}
+              onClick={() => navigate("/idea-create")}
+            >
+              <WhiteStarsvg /> Create new idea
+            </button>
+          </RoleCheckerFunction>
+        </div>
+        <div className={styles.ideasWrapper}>
+          <h2>MY IDEAS</h2>
+          <div>
+            {data.map((idea) => (
+              <div>
+                {idea.owner_id === user && (
+                  <div key={idea.id} className={styles.IndividualSets}>
+                    <div
+                      onClick={() => {
+                        navigate(`/idea/${idea.id}`);
+                      }}
+                    >
+                      {" "}
+                      <h3>{idea.title}</h3>
+                      <p>{idea.description}</p>
+                      <button>
+                        See More <Clicksvg />
+                      </button>
+                    </div>
+                    <div className={styles.Likes}>
+                      <button>
+                        <Likesvg color="#0098CA" />
+                      </button>
+                      <button>
+                        <DisLikesvg color="#000" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.ideasWrapper}>
+          <h2>EXPLORE IDEAS</h2>
+          <div>
+            {data.map((idea) => (
+              <>
+                {idea.owner_id !== user && (
+                  <div key={idea.id} className={styles.IndividualSets}>
+                    <div
+                      onClick={() => {
+                        navigate(`/idea/${idea.id}`);
+                      }}
+                    >
+                      {" "}
+                      <h3>{idea.title}</h3>
+                      <p>{idea.description}</p>
+                      <button>
+                        See More <Clicksvg />
+                      </button>
+                    </div>
+                    <div className={styles.Likes}>
+                      <button>
+                        <Likesvg color="#0098CA" />
+                      </button>
+                      <button>
+                        <DisLikesvg color="#000" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+      <Nabvar />
+    </>
+  );
 };
 
 export default IdeaList;

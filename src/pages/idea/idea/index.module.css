@@ -29,17 +29,17 @@
   border: 0.5px solid black;
   padding: 10px;
   border-radius: 10px;
-  color: #A0A5BA;
+  color: #a0a5ba;
 }
 
-.Requirement img{
+.Requirement img {
   width: 55px;
   height: 55px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.AddUserForm{
+.AddUserForm {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -50,25 +50,46 @@
   border-radius: 20px;
 }
 
-
-.AddUserForm img{
+.AddUserForm img {
   width: 35px;
   height: 35px;
   background-color: aquamarine;
   border-radius: 50%;
 }
 
-.AddUserForm h3{
+.AddUserForm h3 {
   font-size: 17px;
   font-weight: 500;
 }
 
-.AddUserForm .ButtonContainer{
+.AddUserForm .ButtonContainer {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.AddUserForm .ButtonContainer button{
+.AddUserForm .ButtonContainer button {
   background-color: transparent;
+}
+
+.ContributeBtn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  background-color: #0098ca;
+  color: white;
+}
+
+.RequestedStyle {
+  background-color: #8ec8dc;
+  width: fit-content;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
+.RegectedStyle {
+  background-color: #dc8e8e;
+  width: fit-content;
+  padding: 10px 15px;
+  border-radius: 15px;
 }
