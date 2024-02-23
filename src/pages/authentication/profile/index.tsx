@@ -63,16 +63,33 @@ const Profile = () => {
 			<Topnav />
 			{pic && data && (
 				<div className={styles.Wrapper}>
-					<img
-						style={{
-							width: "130px",
-							height: "130px",
-							objectFit: "cover",
-							borderRadius: "50%",
-						}}
-						src={pic}
-						alt="test"
-					/>
+					{id ? (
+						<img
+							style={{
+								width: "130px",
+								height: "130px",
+								objectFit: "cover",
+								borderRadius: "50%",
+							}}
+							src={
+								"https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
+								id +
+								".jpeg"
+							}
+							alt="test"
+						/>
+					) : (
+						<img
+							style={{
+								width: "130px",
+								height: "130px",
+								objectFit: "cover",
+								borderRadius: "50%",
+							}}
+							src={pic}
+							alt="test"
+						/>
+					)}
 					<div className={styles.Details}>
 						{" "}
 						<h2>{data.name}</h2>
