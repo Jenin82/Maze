@@ -28,7 +28,7 @@ export const Nabvar = (_props: Props) => {
 
   const renderNavButton = ({ path, Icon }: NavItem) => (
     <button onClick={() => handleNavigation(path)}>
-      <Icon color={window.location.href.includes(path) ? "#210535" : "#fff"} />
+      <Icon color={window.location.href.includes(path) ? "#0098CA" : "#000"} />
     </button>
   );
   return (

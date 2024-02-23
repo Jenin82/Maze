@@ -78,10 +78,10 @@ const IdeaList = () => {
                     </div>
                     <div className={styles.Likes}>
                       <button>
-                        <Likesvg />
+                        <Likesvg color="#0098CA" />
                       </button>
                       <button>
-                        <DisLikesvg />
+                        <DisLikesvg color="#000" />
                       </button>
                     </div>
                   </div>
@@ -111,10 +111,10 @@ const IdeaList = () => {
                     </div>
                     <div className={styles.Likes}>
                       <button>
-                        <Likesvg />
+                        <Likesvg color="#0098CA" />
                       </button>
                       <button>
-                        <DisLikesvg />
+                        <DisLikesvg color="#000" />
                       </button>
                     </div>
                   </div>
