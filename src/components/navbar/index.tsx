@@ -20,7 +20,7 @@ export const Nabvar = (_props: Props) => {
 
   const navItems: NavItem[] = [
     { path: "/idea-list", Icon: Findsvg },
-    { path: "/", Icon: Homesvg },
+    { path: "/home", Icon: Homesvg },
     { path: "/profile", Icon: Profilesvg },
   ];
 
