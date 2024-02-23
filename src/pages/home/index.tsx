@@ -7,11 +7,13 @@ import styles from "./index.module.css";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { supabase } from "../../utils/supabase";
+import { Searchsvg } from "../../components/navbar/svg";
 
 const Home = () => {
 	const [refresh, setRefresh] = useState(false);
 	const [data, setData] = useState<ProfileData[]>([]);
 	const [user, setUser] = useState("");
+	const [search, setSearch] = useState("");
 
 	const fetchData = async () => {
 		const {
@@ -121,8 +123,12 @@ const Home = () => {
 					</h1>
 					<h2>Participants</h2>
 				</div>
+				<div className={styles.SearchField}><Searchsvg /><input type="text" placeholder="Search participant" value={search} onChange={(e) => setSearch(e.target.value)} /></div>
 				<div className={styles.InnerWrapper}>
 					{data
+						.filter(user => {
+							return (user.name.toLowerCase().startsWith(search.toLowerCase()))
+						})
 						.map((user) => {
 							const upvotes = user.user_user_link.filter(
 								(link: { voted: boolean; }) => link.voted === true
@@ -184,7 +190,7 @@ const Home = () => {
 									</div>
 								</div>
 							</div>
-						))}
+						)) || <p>No participants found</p>}
 				</div>
 			</div>
 			<Nabvar />

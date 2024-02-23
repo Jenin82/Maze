@@ -15,7 +15,7 @@ export const Topnav = (_props: Props) => {
   };
   const path = useReactPath();
 
-  useEffect(() => {}, [path]);
+  useEffect(() => { }, [path]);
 
   return (
     <div className={styles.TopnavWrapper}>

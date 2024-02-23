@@ -2,7 +2,7 @@
   width: 80%;
   background: rgb(255, 255, 255);
   padding: 12px 5%;
-box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,7 +16,7 @@ box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
   background-color: transparent;
 }
 
-.Wrapper button > svg {
+.Wrapper button>svg {
   height: 30px;
 }
 
@@ -32,4 +32,9 @@ box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
 
 .TopnavWrapper button {
   background-color: transparent;
+}
+
+.TopnavWrapper .SearchButton {
+  width: 30px;
+  height: 30px;
 }
