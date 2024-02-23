@@ -34,7 +34,7 @@ function App() {
 			element: <SignIn />,
 		},
 		{
-			path: "/welcome",
+			path: "/",
 			element: <Welcome />,
 		},
 		{
@@ -46,7 +46,7 @@ function App() {
 			element: <PrivateRoute />,
 			children: [
 				{
-					path: "/",
+					path: "/home",
 					element: <Home />,
 				},
 				{

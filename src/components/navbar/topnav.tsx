@@ -19,7 +19,7 @@ export const Topnav = (_props: Props) => {
 
   return (
     <div className={styles.TopnavWrapper}>
-      <button onClick={() => handleNavigation("/")}>
+      <button onClick={() => handleNavigation("/home")}>
         <Logosvg />
       </button>
     </div>
