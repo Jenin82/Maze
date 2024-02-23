@@ -1,112 +1,113 @@
 .Wrapper {
-	min-height: 100vh;
-	padding-bottom: 80px;
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
 
 .Wrapper .infifty {
-	font-weight: 800;
-	font-size: 50px;
-	color: #414d59;
+  font-weight: 800;
+  font-size: 50px;
+  color: #414d59;
 }
 
 .participants {
-	display: flex;
-	flex-direction: column;
-	padding: 100px 10% 80px;
-	gap: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 10% 80px;
+  gap: 30px;
 }
 
 .participants .InnerWrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .participants .SearchField {
-	width: 100%;
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	background-color: white;
-	border: 1px solid black;
-	border-radius: 10px;
-	padding-left: 10px
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-left: 10px;
 }
 
 .participants .SearchField input {
-	border: none !important;
-	outline: none !important;
-	width: 100%;
-	padding: 10px;
+  border: none !important;
+  outline: none !important;
+  width: 100%;
+  padding: 10px;
 }
 
 .InnerWrapper .Individual {
-	display: flex;
-	width: 100%;
-	background-color: rgba(41, 228, 253, 0.1);
-	justify-content: space-between;
-	align-items: center;
-	gap: 15px;
-	padding: 10px 5px;
-	border-radius: 10px;
+  display: flex;
+  width: 100%;
+  background-color: rgba(41, 228, 253, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 5px;
+  border-radius: 10px;
 }
 
 .Individual img {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background-color: brown;
-	flex-shrink: 0;
-	object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: brown;
+  flex-shrink: 0;
+  object-fit: cover;
 }
 
 .Individual .headerset {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 3px;
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
 }
 
 .Individual .headerset h2 {
-	font-size: 19px;
-	font-weight: 500;
+  font-size: 19px;
+  font-weight: 500;
+  text-align: left;
 }
 
 .Individual .headerset h3 {
-	font-size: 15px;
-	font-weight: 400;
-	text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .Individual .headerset button {
-	background-color: transparent;
-	color: #0098ca;
+  background-color: transparent;
+  color: #0098ca;
 }
 
 .Individual .upward {
-	display: flex;
-	gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .Individual .upward .up {
-	border: 2px solid green;
-	padding: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 10px;
-	color: green;
-	background-color: rgba(173, 255, 47, 0.2);
+  border: 2px solid green;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  color: green;
+  background-color: rgba(173, 255, 47, 0.2);
 }
 
 .Individual .upward .down {
-	border: 2px solid red;
-	padding: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 10px;
-	color: red;
-	background-color: rgba(255, 47, 47, 0.2);
+  border: 2px solid red;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  color: red;
+  background-color: rgba(255, 47, 47, 0.2);
 }

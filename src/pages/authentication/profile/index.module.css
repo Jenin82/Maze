@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 30px;
   align-items: center;
+  width: 100%;
 }
 .Details {
   display: flex;
@@ -31,6 +32,10 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: 5.22px;
+}
+
+.Details p{
+  max-width: 430px;
 }
 .SkillsWrapp {
   display: flex;
