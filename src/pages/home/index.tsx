@@ -154,7 +154,7 @@ const Home = () => {
 								/>
 								<div className={styles.headerset}>
 									<h2>{user.name}</h2>
-									<h3>{user.user_role_link.roles.name}</h3>
+									<h3>{user?.user_role_link?.roles.name}</h3>
 									<button onClick={() => navigate(`/profile/${user.id}`)}>
 										See More <Clicksvg />
 									</button>
