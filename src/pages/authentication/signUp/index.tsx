@@ -57,7 +57,7 @@ const SignUp = () => {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.Header}>
-        <button>
+        <button onClick={() => navigate("/")}>
           <BackArrowsvg />
         </button>
         <div>

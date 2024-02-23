@@ -58,7 +58,7 @@ const SignIn = () => {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.Header}>
-        <button>
+        <button onClick={() => navigate("/")}>
           <BackArrowsvg />
         </button>
         <div>
@@ -84,12 +84,12 @@ const SignIn = () => {
           />
         </div>
         <div className={styles.ForgotPass}>
-          <div>
+          {/* <div>
             {" "}
             <input id="remeberme" type="checkbox" />
             <label htmlFor="remeberme">Remember me </label>
           </div>
-          <button>Forgot Password</button>
+          <button>Forgot Password</button> */}
         </div>
         <button type="submit">Sign In</button>
       </form>
