@@ -91,7 +91,7 @@ const ProfileCreate = () => {
 			loading: "Creating your profile...",
 			success: () => {
 				localStorage.setItem("roles", JSON.stringify([role]));
-				navigate("/");
+				navigate("/signin");
 				return <b>Profile update successful</b>;
 			},
 			error: (error) => {
