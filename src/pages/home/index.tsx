@@ -22,13 +22,14 @@ const Home = () => {
 		}
 		let { data: users, error } = await supabase
 			.from("users")
-			.select(`*, user_role_link(*,roles(*))`);
+			.select(
+				`*, user_role_link(*,roles(*)), user_user_link!public_user_user_link_user_id_fkey(*)`
+			); // Adjusted to use the specific relationship
 		if (error) {
 			toast.error(error.message);
 			throw error.message;
 		} else if (users) {
 			setData(users);
-			return users;
 		}
 	};
 
@@ -41,18 +42,17 @@ const Home = () => {
 			.from("user_user_link")
 			.select("*")
 			.eq("user_id", userData.id)
-			.eq("voter_id", user);
-
+			.eq("voter_id", user)
+			.single();
 		if (error) {
 			toast.error(error.message);
 			throw new Error(error.message);
-		} else if (userUserLink && userUserLink.length > 0) {
+		} else if (userUserLink) {
 			// If the row already exists, update the voted field
 			const { data, error } = await supabase
 				.from("user_user_link")
 				.update({ voted: true })
-				.eq("user_id", userData.id)
-				.eq("voter_id", user)
+				.eq("id", userUserLink.id)
 				.select();
 			if (error) {
 				throw new Error(error.message);
@@ -80,18 +80,17 @@ const Home = () => {
 			.from("user_user_link")
 			.select("*")
 			.eq("user_id", userData.id)
-			.eq("voter_id", user);
-
+			.eq("voter_id", user)
+			.single();
 		if (error) {
 			toast.error(error.message);
 			throw new Error(error.message);
-		} else if (userUserLink && userUserLink.length > 0) {
+		} else if (userUserLink) {
 			// If the row already exists, update the voted field
 			const { data, error } = await supabase
 				.from("user_user_link")
 				.update({ voted: false })
-				.eq("user_id", userData.id)
-				.eq("voter_id", user)
+				.eq("id", userUserLink.id)
 				.select();
 			if (error) {
 				throw new Error(error.message);
@@ -147,14 +146,28 @@ const Home = () => {
 									className={styles.up}
 									onClick={() => handleUpvote(user)}
 								>
-									<p>10</p>
+									<p>
+										{
+											user.user_user_link.filter(
+												(link: { voted: boolean }) =>
+													link.voted === true
+											).length
+										}
+									</p>
 									<IoIosArrowUp />
 								</div>
 								<div
 									className={styles.down}
 									onClick={() => handleDownvote(user)}
 								>
-									<p>5</p>
+									<p>
+										{
+											user.user_user_link.filter(
+												(link: { voted: boolean }) =>
+													link.voted === false
+											).length
+										}
+									</p>
 									<IoIosArrowDown />
 								</div>
 							</div>

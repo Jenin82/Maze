@@ -47,6 +47,7 @@ interface IdeaUserLink {
 }
 
 interface ProfileData {
+	user_user_link: any;
 	id: string;
 	name: string;
 	email: string;
