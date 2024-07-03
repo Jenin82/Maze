@@ -6,7 +6,7 @@
 .Wrapper .infifty {
   font-weight: 800;
   font-size: 50px;
-  color: #414d59;
+  color: #212832;
 }
 
 .participants {
@@ -82,7 +82,7 @@
 
 .Individual .headerset button {
   background-color: transparent;
-  color: #0098ca;
+  color: #fe0000;
 }
 
 .Individual .upward {

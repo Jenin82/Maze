@@ -113,11 +113,7 @@ const IdeaList = () => {
               <div key={idea.id}>
                 {idea.owner_id === user && (
                   <div className={styles.IndividualSets}>
-                    <div
-                      onClick={() =>
-                        navigate(`/idea/${idea.id}`)
-                      }
-                    >
+                    <div onClick={() => navigate(`/idea/${idea.id}`)}>
                       <h3>{idea.title}</h3>
                       <p>{idea.description}</p>
                       <button>
@@ -125,33 +121,14 @@ const IdeaList = () => {
                       </button>
                     </div>
                     <div className={styles.Likes}>
-                      <button
-                        onClick={() =>
-                          handleVote(idea.id, "like")
-                        }
-                      >
+                      <button onClick={() => handleVote(idea.id, "like")}>
                         <Likesvg
-                          color={
-                            isVoted(idea, "like")
-                              ? "#AAFF00"
-                              : "#000"
-                          }
+                          color={isVoted(idea, "like") ? "#AAFF00" : "#000"}
                         />
                       </button>
-                      <button
-                        onClick={() =>
-                          handleVote(
-                            idea.id,
-                            "dislike"
-                          )
-                        }
-                      >
+                      <button onClick={() => handleVote(idea.id, "dislike")}>
                         <DisLikesvg
-                          color={
-                            isVoted(idea, "dislike")
-                              ? "#FF0000"
-                              : "#000"
-                          }
+                          color={isVoted(idea, "dislike") ? "#FF0000" : "#000"}
                         />
                       </button>
                     </div>
@@ -163,21 +140,27 @@ const IdeaList = () => {
         </div>
         <div className={styles.ideasWrapper}>
           <h2>EXPLORE IDEAS</h2>
-          <div className={styles.SearchField}><Searchsvg /><input type="text" placeholder="Search ideas" value={search} onChange={(e) => setSearch(e.target.value)} /></div>
+          <div className={styles.SearchField}>
+            <Searchsvg />
+            <input
+              type="text"
+              placeholder="Search ideas"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
           <div>
             {data
               .filter((idea) => {
-                return (idea.title.toLowerCase().startsWith(search.toLowerCase()))
+                return idea.title
+                  .toLowerCase()
+                  .startsWith(search.toLowerCase());
               })
               .map((idea) => (
                 <div key={idea.id}>
                   {idea.owner_id !== user && (
                     <div className={styles.IndividualSets}>
-                      <div
-                        onClick={() =>
-                          navigate(`/idea/${idea.id}`)
-                        }
-                      >
+                      <div onClick={() => navigate(`/idea/${idea.id}`)}>
                         <h3>{idea.title}</h3>
                         <p>{idea.description}</p>
                         <button>
@@ -185,32 +168,15 @@ const IdeaList = () => {
                         </button>
                       </div>
                       <div className={styles.Likes}>
-                        <button
-                          onClick={() =>
-                            handleVote(idea.id, "like")
-                          }
-                        >
+                        <button onClick={() => handleVote(idea.id, "like")}>
                           <Likesvg
-                            color={
-                              isVoted(idea, "like")
-                                ? "#0098ca"
-                                : "#000"
-                            }
+                            color={isVoted(idea, "like") ? "#FE0000" : "#000"}
                           />
                         </button>
-                        <button
-                          onClick={() =>
-                            handleVote(
-                              idea.id,
-                              "dislike"
-                            )
-                          }
-                        >
+                        <button onClick={() => handleVote(idea.id, "dislike")}>
                           <DisLikesvg
                             color={
-                              isVoted(idea, "dislike")
-                                ? "#FF0000"
-                                : "#000"
+                              isVoted(idea, "dislike") ? "#FF0000" : "#000"
                             }
                           />
                         </button>

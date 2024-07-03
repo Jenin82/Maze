@@ -1,98 +1,98 @@
 .Wrapper {
-	/* background: url(../../../assets/background2.png) center center/cover no-repeat; */
-	min-height: 100vh;
-	padding: 100px 10%;
-	display: flex;
-	flex-direction: column;
-	text-align: left;
-	gap: 25px;
-	width: 100%;
+  /* background: url(../../../assets/background2.png) center center/cover no-repeat; */
+  min-height: 100vh;
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 25px;
+  width: 100%;
 }
 
 .Wrapper h1 {
-	font-size: 30px;
-	text-transform: uppercase;
+  font-size: 30px;
+  text-transform: uppercase;
 }
 
 .Requirement {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .Requirement > div {
-	display: flex;
-	gap: 10px;
-	flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .Requirement > div p {
-	background-color: white;
-	border: 0.5px solid black;
-	padding: 10px;
-	border-radius: 10px;
-	color: #a0a5ba;
+  background-color: white;
+  border: 0.5px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  color: #a0a5ba;
 }
 
 .Requirement img {
-	width: 55px;
-	height: 55px;
-	object-fit: cover;
-	border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .AddUserForm {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	width: 100%;
-	justify-content: space-between;
-	background-color: #ededed;
-	padding: 10px;
-	border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #ededed;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .AddUserForm img {
-	width: 35px;
-	height: 35px;
-	background-color: aquamarine;
-	border-radius: 50%;
-	object-fit: cover;
+  width: 35px;
+  height: 35px;
+  background-color: aquamarine;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .AddUserForm h3 {
-	font-size: 17px;
-	font-weight: 500;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .AddUserForm .ButtonContainer {
-	display: flex;
-	align-items: center;
-	gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .AddUserForm .ButtonContainer button {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 .ContributeBtn {
-	width: 100%;
-	padding: 15px;
-	border-radius: 30px;
-	background-color: #0098ca;
-	color: white;
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  background-color: #fe0000;
+  color: white;
 }
 
 .RequestedStyle {
-	background-color: #8ec8dc;
-	width: fit-content;
-	padding: 10px 15px;
-	border-radius: 15px;
+  background-color: #8ec8dc;
+  width: fit-content;
+  padding: 10px 15px;
+  border-radius: 15px;
 }
 
 .RegectedStyle {
-	background-color: #dc8e8e;
-	width: fit-content;
-	padding: 10px 15px;
-	border-radius: 15px;
+  background-color: #dc8e8e;
+  width: fit-content;
+  padding: 10px 15px;
+  border-radius: 15px;
 }

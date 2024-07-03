@@ -7,6 +7,7 @@
   gap: 30px;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 .Details {
   display: flex;
@@ -14,7 +15,7 @@
   gap: 10px;
 }
 .Details h2 {
-  color: #414d59;
+  color: #212832;
   text-align: center;
 
   font-size: 34px;
@@ -24,7 +25,7 @@
 }
 
 .Details h3 {
-  color: #0098ca;
+  color: #fe0000;
   text-align: center;
   font-family: "SF Pro Rounded";
   font-size: 17px;
@@ -34,7 +35,7 @@
   letter-spacing: 5.22px;
 }
 
-.Details p{
+.Details p {
   max-width: 430px;
 }
 .SkillsWrapp {
@@ -67,7 +68,7 @@
 }
 
 .ideasWrapper h2 {
-  color: #0098ca;
+  color: #fe0000;
   text-align: center;
   font-family: "SF Pro Rounded";
   font-size: 16px;
@@ -85,7 +86,6 @@
   background-color: white;
   padding: 10px 5px;
   border-radius: 10px;
-
 }
 .ideasWrapper .IndividualSets h3 {
   font-size: 20px;
@@ -98,7 +98,7 @@
 }
 .ideasWrapper .IndividualSets button {
   background-color: transparent;
-  color: #0098ca;
+  color: #fe0000;
   font-size: 17px;
 }
 
@@ -107,11 +107,21 @@
   gap: 15px;
 }
 
-
-.Logout{
+.Logout {
   width: 100%;
-  background-color: #0098ca;
+  background-color: #fe0000;
   padding: 15px;
   color: white;
   border-radius: 30px;
+}
+
+.editbutton {
+  background-color: #fe0000;
+  position: absolute;
+  font-size: 25px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  right: 50px !important;
+  bottom: 150px !important;
 }

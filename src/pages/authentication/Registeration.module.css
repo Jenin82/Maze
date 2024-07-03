@@ -52,21 +52,21 @@
 
 .ForgotPass button {
   background-color: transparent;
-  color: #0098ca;
+  color: #FE0000;
   font-size: 17px;
   font-weight: 600;
 }
 
 form> button {
   width: 100%;
-  background-color: #0098ca;
+  background-color: #FE0000;
   padding: 15px;
   border-radius: 30px;
   font-size: 17px;
 }
 
 span a{
-    color: #0098ca;
+    color: #FE0000;
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 600;

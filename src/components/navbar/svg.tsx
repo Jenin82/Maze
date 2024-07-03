@@ -1,8 +1,6 @@
-
-
 type Props = {
-  color?:string;
-}
+  color?: string;
+};
 
 export const Findsvg = (_props: Props) => {
   return (
@@ -21,8 +19,7 @@ export const Findsvg = (_props: Props) => {
       />
     </svg>
   );
-}
-
+};
 
 export const Homesvg = (_props: Props) => {
   return (
@@ -39,9 +36,7 @@ export const Homesvg = (_props: Props) => {
       />
     </svg>
   );
-}
-
-
+};
 
 export const Profilesvg = (_props: Props) => {
   return (
@@ -68,9 +63,7 @@ export const Profilesvg = (_props: Props) => {
       />
     </svg>
   );
-}
-
-
+};
 
 export const Searchsvg = (_props: Props) => {
   return (
@@ -87,9 +80,7 @@ export const Searchsvg = (_props: Props) => {
       />
     </svg>
   );
-}
-
-
+};
 
 export const Notifisvg = (_props: Props) => {
   return (
@@ -106,8 +97,7 @@ export const Notifisvg = (_props: Props) => {
       />
     </svg>
   );
-}
-
+};
 
 export const Logosvg = (_props: Props) => {
   return (
@@ -124,12 +114,12 @@ export const Logosvg = (_props: Props) => {
         width="9.12618"
         height="31.148"
         rx="0.615025"
-        stroke="#0098CA"
+        stroke="#FE0000"
         stroke-width="1.19037"
       />
       <path
         d="M10.8553 23.1292L10.2693 23.1383V23.7243V31.9577V32.5529H10.8645H24.3625C24.4714 32.5529 24.5783 32.5239 24.6724 32.4691L24.6724 32.4691L27.9359 30.5654L27.947 30.5589L27.9578 30.552L31.7432 28.1185L31.7432 28.1185C32.1307 27.8694 32.1169 27.2986 31.718 27.0684L31.718 27.0684L24.67 23.0023L24.67 23.0023C24.5738 22.9467 24.4643 22.9183 24.3532 22.92L10.8553 23.1292Z"
-        stroke="#0098CA"
+        stroke="#FE0000"
         stroke-width="1.19037"
       />
       <rect
@@ -138,7 +128,7 @@ export const Logosvg = (_props: Props) => {
         width="3.17432"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -146,7 +136,7 @@ export const Logosvg = (_props: Props) => {
         width="3.47192"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -154,7 +144,7 @@ export const Logosvg = (_props: Props) => {
         width="4.56309"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -162,7 +152,7 @@ export const Logosvg = (_props: Props) => {
         width="3.17432"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -170,7 +160,7 @@ export const Logosvg = (_props: Props) => {
         width="3.37272"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -178,7 +168,7 @@ export const Logosvg = (_props: Props) => {
         width="4.56309"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -186,7 +176,7 @@ export const Logosvg = (_props: Props) => {
         width="3.37272"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <rect
         x="0.44873"
@@ -194,11 +184,11 @@ export const Logosvg = (_props: Props) => {
         width="3.37272"
         height="1.19037"
         rx="0.297593"
-        fill="#0098CA"
+        fill="#FE0000"
       />
       <path
         d="M24.721 31.7314L25.0417 32.2758L31.6209 28.3996C32.1001 28.1173 32.0981 27.4236 31.6173 27.144L25.0335 23.3163C24.7367 23.1437 24.3595 23.2022 24.1289 23.4566L24.5971 23.8809L24.1289 23.4566L22.7115 25.0207C22.4626 25.2953 22.46 25.7132 22.7054 25.9909L24.2946 27.7891L22.8385 29.5781C22.6235 29.8422 22.6205 30.22 22.8313 30.4875L24.1011 32.0992C24.3263 32.3851 24.7282 32.4605 25.0417 32.2758L24.721 31.7314Z"
-        stroke="#0098CA"
+        stroke="#FE0000"
         stroke-width="1.26362"
       />
       <circle
@@ -228,4 +218,4 @@ export const Logosvg = (_props: Props) => {
       />
     </svg>
   );
-}
+};
