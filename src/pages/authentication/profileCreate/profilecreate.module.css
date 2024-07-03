@@ -13,7 +13,7 @@
 }
 
 .Wrapper h1 {
-  color: #414d59;
+  color: #212832;
 }
 .SegmentOne {
   height: 100%;
@@ -26,7 +26,7 @@
 
 .Wrapper .NextButton {
   border-radius: 30px;
-  background: #0098ca;
+  background: #fe0000;
   width: 100%;
   padding: 15px;
   font-size: 17px;

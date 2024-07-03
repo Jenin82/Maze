@@ -14,14 +14,14 @@
 .Wrapper h1 {
   font-size: 50px;
   line-height: 1;
-  color: #414d59;
+  color: #212832;
 }
 
 .Wrapper .buttonCreate {
   width: 100%;
   padding: 18px;
   border-radius: 30px;
-  background-color: #0098ca;
+  background-color: #fe0000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
 }
 
 .ideasWrapper h2 {
-  color: #0098ca;
+  color: #fe0000;
   text-align: center;
   font-family: "SF Pro Rounded";
   font-size: 16px;
@@ -69,10 +69,9 @@
 
 .ideasWrapper .IndividualSets button {
   background-color: transparent;
-  color: #0098ca;
+  color: #fe0000;
   font-size: 17px;
 }
-
 
 .IndividualSets .Likes {
   display: flex;
@@ -87,7 +86,7 @@
   background-color: white;
   border: 1px solid black;
   border-radius: 10px;
-  padding-left: 10px
+  padding-left: 10px;
 }
 
 .ideasWrapper .SearchField input {
