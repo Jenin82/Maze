@@ -23,7 +23,7 @@ const Profile = () => {
     if (user) {
       const { data } = supabase.storage
         .from("avatar")
-        .getPublicUrl(`avatar_${user.id}.jpeg?timestamp=${Date.now()}`);
+        .getPublicUrl(`avatar_${user.id}.webp?timestamp=${Date.now()}`);
       if (data.publicUrl) {
         setPic(data.publicUrl);
         if (id) {
@@ -74,7 +74,7 @@ const Profile = () => {
               src={
                 "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
                 id +
-                ".jpeg"
+                ".webp"
               }
               alt="test"
             />

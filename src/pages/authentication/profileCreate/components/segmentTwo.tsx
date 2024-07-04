@@ -1,7 +1,8 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import styles from "../index.module.css";
 import { BackArrowsvg } from "../../../../assets/svg";
 import toast from "react-hot-toast";
+import { convertToWebP } from "../../../../utils/imageUtils";
 
 interface SegmentTwoProps {
   data: ProfileCreate;
@@ -25,9 +26,25 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
   setProfilePic,
   setPage,
 }) => {
-  const handleProfilePicChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const handleProfilePicChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    setProfilePic(file || null);
+    if (file && file.type.startsWith("image/")) {
+      const convertedFile = await convertToWebP(file);
+      setProfilePic(
+        new File([convertedFile], "profile.webp", { type: "image/webp" })
+      );
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreviewImage(e.target?.result as string);
+      };
+      reader.readAsDataURL(convertedFile);
+    } else {
+      setProfilePic(null);
+      setPreviewImage(null);
+    }
   };
 
   return (
@@ -59,6 +76,13 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
               onChange={handleProfilePicChange}
               required
             />
+            {previewImage && (
+              <img
+                src={previewImage}
+                alt="Profile Preview"
+                className={styles.PreviewImage}
+              />
+            )}
           </div>
           <div>
             <p>Bio</p>

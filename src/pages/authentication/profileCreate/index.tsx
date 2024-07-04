@@ -88,7 +88,7 @@ const ProfileCreate = () => {
       } else if (response && profilePic) {
         await supabase.storage
           .from("avatar")
-          .upload("avatar_" + user.id + ".jpeg", profilePic, {
+          .upload("avatar_" + user.id + ".webp", profilePic, {
             upsert: true,
           });
         const { data: roleResponse, error: roleError } = await supabase
