@@ -126,7 +126,7 @@ const Profile = () => {
           )}
           {!id && (
             <button
-              onClick={() => navigate("/profile-create")}
+              onClick={() => navigate("/profile-create?edit=true")}
               className={styles.editbutton}
             >
               <CiEdit />

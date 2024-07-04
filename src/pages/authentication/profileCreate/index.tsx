@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
 import styles from "./index.module.css";
 import SegmentOne from "./components/segmentOne";
@@ -23,8 +23,17 @@ const ProfileCreate = () => {
   const [role, setRole] = useState<string>("");
   const [page, setPage] = useState<0 | 1 | 2>(0);
   const navigate = useNavigate();
+  const location = useLocation();
   const [newSkill, setNewSkill] = useState("");
   const [profilePic, setProfilePic] = useState<File | null>(null);
+
+  // Function to parse the query parameters
+  const useQuery = () => {
+    return new URLSearchParams(location.search);
+  };
+
+  const query = useQuery();
+  const edit = query.get("edit");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -131,7 +140,7 @@ const ProfileCreate = () => {
       loading: "Creating your profile...",
       success: () => {
         localStorage.setItem("roles", JSON.stringify([role]));
-        navigate("/signin");
+        navigate(edit ? "/profile" : "/");
         return <b>Profile update successful</b>;
       },
       error: (error) => {
