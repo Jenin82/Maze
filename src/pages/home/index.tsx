@@ -16,9 +16,11 @@ const Home = () => {
   const [data, setData] = useState<ProfileData[]>([]);
   const [user, setUser] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
 
   const fetchData = async () => {
+    setLoading(true); // Start loading
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -51,6 +53,7 @@ const Home = () => {
       );
       setData(updatedUsers);
     }
+    setLoading(false); // End loading
   };
 
   useEffect(() => {
@@ -130,80 +133,86 @@ const Home = () => {
   return (
     <div className={styles.Wrapper}>
       <Topnav />
-      <div className={styles.participants}>
-        <div>
-          <h1 className={styles.infifty}>
-            IN<span className="colorText">50</span>HRS
-          </h1>
-          <h2>Participants</h2>
+      {loading ? ( // Show loader if loading
+        <div id="overlay">
+          <img src="/Loader.png" alt="" />
         </div>
-        <div className={styles.SearchField}>
-          <Searchsvg />
-          <input
-            type="text"
-            placeholder="Search participant"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className={styles.InnerWrapper}>
-          {data
-            .filter((user) => {
-              return user.name.toLowerCase().startsWith(search.toLowerCase());
-            })
-            .map((user) => {
-              const upvotes = user.user_user_link.filter(
-                (link: { voted: boolean }) => link.voted === true
-              ).length;
-              const downvotes = user.user_user_link.filter(
-                (link: { voted: boolean }) => link.voted === false
-              ).length;
-              const netVotes = upvotes - downvotes;
-              return { ...user, netVotes };
-            })
-            .sort((a, b) => b.netVotes - a.netVotes)
-            .map((user, index) => (
-              <div className={styles.Individual} key={index}>
-                <img
-                  src={user.imageUrl}
-                  alt={user.name}
-                />
-                <div className={styles.headerset}>
-                  <h2>{user.name}</h2>
-                  <h3>{user?.user_role_link?.roles.name}</h3>
-                  <button onClick={() => navigate(`/profile/${user.id}`)}>
-                    See More <Clicksvg />
-                  </button>
-                </div>
-                <div className={styles.upward}>
-                  <div className={styles.up} onClick={() => handleUpvote(user)}>
-                    <p>
-                      {
-                        user.user_user_link.filter(
-                          (link: { voted: boolean }) => link.voted === true
-                        ).length
-                      }
-                    </p>
-                    <IoIosArrowUp />
+      ) : (
+        <div className={styles.participants}>
+          <div>
+            <h1 className={styles.infifty}>
+              IN<span className="colorText">50</span>HRS
+            </h1>
+            <h2>Participants</h2>
+          </div>
+          <div className={styles.SearchField}>
+            <Searchsvg />
+            <input
+              type="text"
+              placeholder="Search participant"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <div className={styles.InnerWrapper}>
+            {data
+              .filter((user) => {
+                return user.name.toLowerCase().startsWith(search.toLowerCase());
+              })
+              .map((user) => {
+                const upvotes = user.user_user_link.filter(
+                  (link: { voted: boolean }) => link.voted === true
+                ).length;
+                const downvotes = user.user_user_link.filter(
+                  (link: { voted: boolean }) => link.voted === false
+                ).length;
+                const netVotes = upvotes - downvotes;
+                return { ...user, netVotes };
+              })
+              .sort((a, b) => b.netVotes - a.netVotes)
+              .map((user, index) => (
+                <div className={styles.Individual} key={index}>
+                  <img src={user.imageUrl} alt={user.name} />
+                  <div className={styles.headerset}>
+                    <h2>{user.name}</h2>
+                    <h3>{user?.user_role_link?.roles.name}</h3>
+                    <button onClick={() => navigate(`/profile/${user.id}`)}>
+                      See More <Clicksvg />
+                    </button>
                   </div>
-                  <div
-                    className={styles.down}
-                    onClick={() => handleDownvote(user)}
-                  >
-                    <p>
-                      {
-                        user.user_user_link.filter(
-                          (link: { voted: boolean }) => link.voted === false
-                        ).length
-                      }
-                    </p>
-                    <IoIosArrowDown />
+                  <div className={styles.upward}>
+                    <div
+                      className={styles.up}
+                      onClick={() => handleUpvote(user)}
+                    >
+                      <p>
+                        {
+                          user.user_user_link.filter(
+                            (link: { voted: boolean }) => link.voted === true
+                          ).length
+                        }
+                      </p>
+                      <IoIosArrowUp />
+                    </div>
+                    <div
+                      className={styles.down}
+                      onClick={() => handleDownvote(user)}
+                    >
+                      <p>
+                        {
+                          user.user_user_link.filter(
+                            (link: { voted: boolean }) => link.voted === false
+                          ).length
+                        }
+                      </p>
+                      <IoIosArrowDown />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )) || <p>No participants found</p>}
+              )) || <p>No participants found</p>}
+          </div>
         </div>
-      </div>
+      )}
       <Nabvar />
     </div>
   );
