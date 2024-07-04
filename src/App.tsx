@@ -14,6 +14,7 @@ import { Roles } from "./services/Roles";
 import Welcome from "./pages/welcome";
 import IdeaList from "./pages/idea/ideaList";
 import Idea from "./pages/idea/idea";
+import Privacy from "./pages/privacy";
 
 function App() {
 	const router = createBrowserRouter([
@@ -36,6 +37,10 @@ function App() {
 		{
 			path: "/",
 			element: <Welcome />,
+		},
+		{
+			path: "/privacy",
+			element: <Privacy />,
 		},
 		{
 			path: "/profile-create",

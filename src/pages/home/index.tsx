@@ -38,10 +38,9 @@ const Home = () => {
     } else if (users) {
       const updatedUsers = await Promise.all(
         users.map(async (user) => {
-          const imageUrl =
-            "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
-            user.id +
-            ".webp";
+          const imageUrl = `https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_${
+            user.id
+          }.webp?timestamp=${Date.now()}`;
           const imageExists = await checkImageExists(imageUrl);
           return {
             ...user,

@@ -64,13 +64,14 @@ const Profile = () => {
     const img = new Image();
     img.src = imageUrl;
     img.onload = () => {
+      console.log("Image loaded successfully");
       setIsValidImage(true);
       setImageSrc(imageUrl);
     };
     img.onerror = () => {
       setIsValidImage(false);
     };
-  }, []);
+  }, [data]);
 
   return (
     <>
