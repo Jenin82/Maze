@@ -11,45 +11,40 @@ import { GitHubsvg, LinkedInsvg, Twittersvg } from "./svg";
 import { CiEdit } from "react-icons/ci";
 
 const Profile = () => {
-  const [pic, setPic] = useState("");
   const [data, setData] = useState<ProfileData>();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [isValidImage, setIsValidImage] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
+  const [userID, setUserID] = useState("");
 
   const fetchData = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const user = await supabase.auth.getSession();
     if (user) {
-      const { data } = supabase.storage
-        .from("avatar")
-        .getPublicUrl(`avatar_${user.id}.webp?timestamp=${Date.now()}`);
-      if (data.publicUrl) {
-        setPic(data.publicUrl);
-        if (id) {
-          let { data: users, error } = await supabase
-            .from("users")
-            .select("*, user_role_link(*,roles(*))")
-            .eq("id", id);
-          if (error) {
-            toast.error(error.message);
-            throw error.message;
-          } else if (users) {
-            setData(users[0]);
-            return users[0];
-          }
-        } else {
-          let { data: users, error } = await supabase
-            .from("users")
-            .select("*, user_role_link(*,roles(*))")
-            .eq("id", user.id);
-          if (error) {
-            toast.error(error.message);
-            throw error.message;
-          } else if (users) {
-            setData(users[0]);
-            return users[0];
-          }
+      setUserID(user.data.session?.user.id!);
+      if (id) {
+        let { data: users, error } = await supabase
+          .from("users")
+          .select("*, user_role_link(*,roles(*))")
+          .eq("id", id);
+        if (error) {
+          toast.error(error.message);
+          throw error.message;
+        } else if (users) {
+          setData(users[0]);
+          return users[0];
+        }
+      } else {
+        let { data: users, error } = await supabase
+          .from("users")
+          .select("*, user_role_link(*,roles(*))")
+          .eq("id", user.data.session?.user.id);
+        if (error) {
+          toast.error(error.message);
+          throw error.message;
+        } else if (users) {
+          setData(users[0]);
+          return users[0];
         }
       }
     }
@@ -58,38 +53,47 @@ const Profile = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const { data } = supabase.storage
+      .from("avatar")
+      .getPublicUrl(
+        `avatar_${id ? id : userID}.webp?timestamp=${Date.now()}`
+      );
+    const imageUrl = data?.publicUrl;
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = () => {
+      console.log("image loaded");
+      setIsValidImage(true);
+      setImageSrc(imageUrl);
+    };
+    img.onerror = () => {
+      console.log("image not loaded");
+      setIsValidImage(false);
+    };
+  }, [id]);
+
   return (
     <>
       <Topnav />
-      {pic && data && (
+      {data && (
         <div className={styles.Wrapper}>
-          {id ? (
-            <img
-              style={{
-                width: "130px",
-                height: "130px",
-                objectFit: "cover",
-                borderRadius: "50%",
-              }}
-              src={
-                "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
-                id +
-                ".webp"
-              }
-              alt="test"
-            />
-          ) : (
-            <img
-              style={{
-                width: "130px",
-                height: "130px",
-                objectFit: "cover",
-                borderRadius: "50%",
-              }}
-              src={pic}
-              alt="test"
-            />
-          )}
+          <img
+            style={{
+              width: "130px",
+              height: "130px",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+            src={
+              isValidImage
+                ? imageSrc
+                : "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+            }
+            alt="Profile image"
+          />
+
           <div className={styles.Details}>
             {" "}
             <h2>{data.name}</h2>

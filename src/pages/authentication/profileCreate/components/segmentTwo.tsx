@@ -95,6 +95,8 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
               <img
                 src={previewImage}
                 alt="Profile Preview"
+                width={100}
+                height={100}
                 className={styles.PreviewImage}
               />
             )}

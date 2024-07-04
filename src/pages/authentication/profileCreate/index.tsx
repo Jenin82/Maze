@@ -47,7 +47,7 @@ const ProfileCreate = () => {
           .eq("id", user.id)
           .single();
         if (userError) {
-          toast.error("Error fetching user data");
+          // toast.error("Error fetching user data");
           return;
         }
 
@@ -57,7 +57,7 @@ const ProfileCreate = () => {
           .eq("user_id", user.id)
           .single();
         if (roleError) {
-          toast.error("Error fetching user role");
+          // toast.error("Error fetching user role");
           return;
         }
 
@@ -84,29 +84,37 @@ const ProfileCreate = () => {
   }, [navigate]);
 
   const handleCreateUser = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const user = await supabase.auth.getSession();
     if (user) {
       const { data: response, error } = await supabase
         .from("users")
-        .upsert({ ...data, id: user.id, email: user.email! })
+        .upsert({
+          ...data,
+          id: user.data.session?.user.id,
+          email: user.data.session?.user.email,
+        })
         .select();
       if (error) {
         throw error.message;
-      } else if (response && profilePic) {
-        await supabase.storage
-          .from("avatar")
-          .upload("avatar_" + user.id + ".webp", profilePic, {
-            upsert: true,
-          });
+      } else if (response) {
         const { data: roleResponse, error: roleError } = await supabase
           .from("user_role_link")
-          .upsert({ user_id: user.id, role_id: role })
+          .upsert({ user_id: user.data.session?.user.id, role_id: role })
           .select();
         if (roleError) {
           throw roleError.message;
         } else if (roleResponse) {
+          if (profilePic) {
+            await supabase.storage
+              .from("avatar")
+              .upload(
+                "avatar_" + user.data.session?.user.id + ".webp",
+                profilePic,
+                {
+                  upsert: true,
+                }
+              );
+          }
           return roleResponse;
         }
       }
@@ -140,7 +148,7 @@ const ProfileCreate = () => {
       loading: "Creating your profile...",
       success: () => {
         localStorage.setItem("roles", JSON.stringify([role]));
-        navigate(edit ? "/profile" : "/");
+        navigate(edit ? "/profile" : "/home");
         return <b>Profile update successful</b>;
       },
       error: (error) => {
