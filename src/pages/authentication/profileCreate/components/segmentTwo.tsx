@@ -1,8 +1,9 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import styles from "../index.module.css";
 import { BackArrowsvg } from "../../../../assets/svg";
 import toast from "react-hot-toast";
 import { convertToWebP } from "../../../../utils/imageUtils";
+import { supabase } from "../../../../utils/supabase";
 
 interface SegmentTwoProps {
   data: ProfileCreate;
@@ -44,6 +45,20 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
     } else {
       setProfilePic(null);
       setPreviewImage(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfilePic();
+  }, []);
+
+  const fetchProfilePic = async () => {
+    const user = await supabase.auth.getSession();
+    const { data } = supabase.storage
+      .from("avatar")
+      .getPublicUrl(`avatar_${user.data.session?.user.id}.webp?timestamp=${Date.now()}`);
+    if (data.publicUrl) {
+      setPreviewImage(data.publicUrl);
     }
   };
 
