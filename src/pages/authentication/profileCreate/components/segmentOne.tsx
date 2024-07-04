@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Select from "react-select";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import styles from "../index.module.css";
 import { BackArrowsvg } from "../../../../assets/svg";
 
@@ -16,51 +17,60 @@ const roleOptions = [
   { value: "4cd125f5-be3c-41c3-a321-4199dacefc1a", label: "Designer" },
 ];
 
-const SegmentOne: FC<SegmentOneProps> = ({ role, setRole, setPage }) => (
-  <>
-    <button onClick={() => setPage(0)}>
-      <BackArrowsvg />
-    </button>
-    <div className={styles.SegmentOne}>
-      <div>
-        <h1>What are you?</h1>
-        <p>Select what describes you the best.</p>
-      </div>
-      <Select
-        options={roleOptions}
-        onChange={(selectedOption) =>
-          setRole(selectedOption ? selectedOption.value : "")
-        }
-        value={roleOptions.find((option) => option.value === role)}
-        styles={{
-          control: (baseStyles) => ({
-            ...baseStyles,
-            borderColor: "#E9E9E9",
-            boxShadow: "none",
-            "&:hover": {
-              borderColor: "#E9E9E9",
-            },
-            width: "75vw",
-            borderRadius: "25px",
-            height: "40px",
-          }),
-        }}
-      />
+const SegmentOne: FC<SegmentOneProps> = ({ role, setRole, setPage }) => {
+  const navigate = useNavigate();
+
+  return (
+    <>
       <button
         onClick={() => {
-          if (!role) {
-            toast.error("Please select a role");
-            return;
-          } else {
-            setPage(1);
-          }
+          setPage(0);
+          navigate(-1);
         }}
-        className={styles.NextButton}
       >
-        Continue
+        <BackArrowsvg />
       </button>
-    </div>
-  </>
-);
+      <div className={styles.SegmentOne}>
+        <div>
+          <h1>What are you?</h1>
+          <p>Select what describes you the best.</p>
+        </div>
+        <Select
+          options={roleOptions}
+          onChange={(selectedOption) =>
+            setRole(selectedOption ? selectedOption.value : "")
+          }
+          value={roleOptions.find((option) => option.value === role)}
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              borderColor: "#E9E9E9",
+              boxShadow: "none",
+              "&:hover": {
+                borderColor: "#E9E9E9",
+              },
+              width: "75vw",
+              borderRadius: "25px",
+              height: "40px",
+            }),
+          }}
+        />
+        <button
+          onClick={() => {
+            if (!role) {
+              toast.error("Please select a role");
+              return;
+            } else {
+              setPage(1);
+            }
+          }}
+          className={styles.NextButton}
+        >
+          Continue
+        </button>
+      </div>
+    </>
+  );
+};
 
 export default SegmentOne;

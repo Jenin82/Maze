@@ -9,6 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { supabase } from "../../utils/supabase";
 import { useNavigate } from "react-router-dom";
 import { Searchsvg } from "../../components/navbar/svg";
+import { checkImageExists } from "../../utils/imageUtils";
 
 const Home = () => {
   const [refresh, setRefresh] = useState(false);
@@ -28,12 +29,27 @@ const Home = () => {
       .from("users")
       .select(
         `*, user_role_link(*,roles(*)), user_user_link!public_user_user_link_user_id_fkey(*)`
-      ); // Adjusted to use the specific relationship
+      );
     if (error) {
       toast.error(error.message);
       throw error.message;
     } else if (users) {
-      setData(users);
+      const updatedUsers = await Promise.all(
+        users.map(async (user) => {
+          const imageUrl =
+            "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
+            user.id +
+            ".webp";
+          const imageExists = await checkImageExists(imageUrl);
+          return {
+            ...user,
+            imageUrl: imageExists
+              ? imageUrl
+              : "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
+          };
+        })
+      );
+      setData(updatedUsers);
     }
   };
 
@@ -51,7 +67,6 @@ const Home = () => {
       toast.error(error.message);
       throw new Error(error.message);
     } else if (userUserLink && userUserLink.length > 0) {
-      // If the row already exists, update the voted field
       const { data, error } = await supabase
         .from("user_user_link")
         .update({ voted: true })
@@ -64,7 +79,6 @@ const Home = () => {
         return data;
       }
     } else {
-      // If the row doesn't exist, insert a new row
       const { data, error } = await supabase
         .from("user_user_link")
         .upsert({ user_id: userData.id, voter_id: user, voted: true })
@@ -88,7 +102,6 @@ const Home = () => {
       toast.error(error.message);
       throw new Error(error.message);
     } else if (userUserLink) {
-      // If the row already exists, update the voted field
       const { data, error } = await supabase
         .from("user_user_link")
         .update({ voted: false })
@@ -101,7 +114,6 @@ const Home = () => {
         return data;
       }
     } else {
-      // If the row doesn't exist, insert a new row
       const { data, error } = await supabase
         .from("user_user_link")
         .upsert({ user_id: userData.id, voter_id: user, voted: false })
@@ -147,17 +159,13 @@ const Home = () => {
                 (link: { voted: boolean }) => link.voted === false
               ).length;
               const netVotes = upvotes - downvotes;
-              return { ...user, netVotes }; // Adding netVotes to each user object
+              return { ...user, netVotes };
             })
-            .sort((a, b) => b.netVotes - a.netVotes) // Sorting users based on netVotes in descending order
+            .sort((a, b) => b.netVotes - a.netVotes)
             .map((user, index) => (
               <div className={styles.Individual} key={index}>
                 <img
-                  src={
-                    "https://mlwspjsnmivgrddhviyc.supabase.co/storage/v1/object/public/avatar/avatar_" +
-                    user.id +
-                    ".webp"
-                  }
+                  src={user.imageUrl}
                   alt={user.name}
                 />
                 <div className={styles.headerset}>

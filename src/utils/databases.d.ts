@@ -64,4 +64,5 @@ interface ProfileData {
 			name: string;
 		}
 	};
+	imageUrl?: string;
 }
