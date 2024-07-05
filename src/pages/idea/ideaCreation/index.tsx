@@ -182,9 +182,9 @@ const IdeaCreation = () => {
               required
             />
           </div>
-          <div>
+          <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
             <p>Requirements (optional)</p>
-            <div>
+            <div style={{display:"flex",gap:"10px"}}>
               <input
                 type="text"
                 placeholder="Enter requirement"
@@ -199,10 +199,10 @@ const IdeaCreation = () => {
                 +
               </button>
             </div>
-            <div>
+            <div className={styles.requirement}>
               {Array.isArray(data.requirements) &&
                 data.requirements.map((requirement, index) => (
-                  <p key={index} onClick={() => handleRemoveRequirement(index)}>
+                  <p key={index}  onClick={() => handleRemoveRequirement(index)}>
                     {requirement}
                   </p>
                 ))}
