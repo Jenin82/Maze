@@ -1,5 +1,5 @@
 .Wrapper {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: url(./Welcome.png) center center/cover no-repeat;
   display: flex;
   flex-direction: column;

@@ -22,6 +22,10 @@ const SignIn = () => {
     if (error) {
       throw error.message;
     } else {
+      if (localStorage.getItem("complete") == "false") {
+        navigate("/profile-create");
+        return;
+      }
       localStorage.setItem("user", JSON.stringify(res.session));
       const { data, error } = await supabase.rpc("get_user_roles", {
         check_user_id: res.user?.id,
@@ -77,6 +81,10 @@ const SignIn = () => {
           navigate("/profile-create");
         }
       } else if (user) {
+        if (localStorage.getItem("complete") == "false") {
+          navigate("/profile-create");
+          return;
+        }
         toast.success("Logged in successfully");
         localStorage.setItem("user", JSON.stringify(data.session));
         const { data: roles, error } = await supabase.rpc("get_user_roles", {

@@ -26,6 +26,7 @@ const SignUp = () => {
     if (error) {
       throw error.message;
     } else {
+      localStorage.setItem("complete", "false");
       localStorage.setItem("user", JSON.stringify(res.session));
       return res;
     }
@@ -73,6 +74,7 @@ const SignUp = () => {
         .single();
       if (userError) {
         if (userError.code === "PGRST116") {
+          localStorage.setItem("complete", "false");
           navigate("/profile-create");
         }
       } else if (user) {

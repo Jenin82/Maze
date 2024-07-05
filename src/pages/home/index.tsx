@@ -10,6 +10,7 @@ import { supabase } from "../../utils/supabase";
 import { useNavigate } from "react-router-dom";
 import { Searchsvg } from "../../components/navbar/svg";
 import { checkImageExists } from "../../utils/imageUtils";
+import { Loader } from "../../components/loader";
 
 const Home = () => {
   const [refresh, setRefresh] = useState(false);
@@ -133,9 +134,7 @@ const Home = () => {
     <div className={styles.Wrapper}>
       <Topnav />
       {loading ? ( // Show loader if loading
-        <div id="overlay">
-          <img src="/Loader.png" alt="" />
-        </div>
+        <Loader />
       ) : (
         <div className={styles.participants}>
           <div>
