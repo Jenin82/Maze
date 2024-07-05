@@ -1,6 +1,6 @@
 .Wrapper {
   background: url(../../../assets/background2.png) center center/cover no-repeat;
-  min-height: 100vh;
+  min-height: 100dvh;
   padding: 50px 10% 80px;
   display: flex;
   flex-direction: column;
@@ -123,5 +123,5 @@
   width: 40px;
   height: 40px;
   right: 50px !important;
-  bottom: 150px !important;
+  top: 50px !important;
 }

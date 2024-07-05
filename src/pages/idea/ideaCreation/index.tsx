@@ -199,10 +199,10 @@ const IdeaCreation = () => {
                 +
               </button>
             </div>
-            <div>
+            <div className={styles.requirement}>
               {Array.isArray(data.requirements) &&
                 data.requirements.map((requirement, index) => (
-                  <p key={index} onClick={() => handleRemoveRequirement(index)}>
+                  <p key={index}  onClick={() => handleRemoveRequirement(index)}>
                     {requirement}
                   </p>
                 ))}
