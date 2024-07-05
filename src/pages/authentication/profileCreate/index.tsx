@@ -156,6 +156,7 @@ const ProfileCreate = () => {
     toast.promise(handleCreateUser(), {
       loading: "Creating your profile...",
       success: () => {
+        localStorage.setItem("complete", "true");
         navigate(edit ? "/profile" : "/home");
         return <b>Profile update successful</b>;
       },
