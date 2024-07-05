@@ -7,7 +7,7 @@
   overflow-y: scroll;
   align-items: center;
   justify-content: center;
-  background: url(../../../assets/background2.png) center center/cover no-repeat;
+  background: url(../../../assets/background2.webp) center center/cover no-repeat;
 }
 .Wrapper button {
   background-color: transparent;
