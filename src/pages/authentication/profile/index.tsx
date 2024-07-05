@@ -4,10 +4,8 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Topnav } from "../../../components/navbar/topnav";
 import { Nabvar } from "../../../components/navbar";
-
 import styles from "./index.module.css";
 import { GitHubsvg, LinkedInsvg, Twittersvg } from "./svg";
-
 import { CiEdit } from "react-icons/ci";
 
 const Profile = () => {

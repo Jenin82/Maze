@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import styles from "../index.module.css";
 import { BackArrowsvg } from "../../../../assets/svg";
 import toast from "react-hot-toast";
-import { convertToWebP } from "../../../../utils/imageUtils";
+import { checkImageExists, convertToWebP } from "../../../../utils/imageUtils";
 import { supabase } from "../../../../utils/supabase";
 
 interface SegmentTwoProps {
@@ -56,9 +56,13 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
     const user = await supabase.auth.getSession();
     const { data } = supabase.storage
       .from("avatar")
-      .getPublicUrl(`avatar_${user.data.session?.user.id}.webp?timestamp=${Date.now()}`);
+      .getPublicUrl(
+        `avatar_${user.data.session?.user.id}.webp?timestamp=${Date.now()}`
+      );
     if (data.publicUrl) {
-      setPreviewImage(data.publicUrl);
+      const imageExists = await checkImageExists(data.publicUrl);
+      if (imageExists) setPreviewImage(data.publicUrl);
+      else setPreviewImage(null);
     }
   };
 
