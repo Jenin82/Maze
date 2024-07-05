@@ -15,8 +15,8 @@ const OptionalFields: FC<OptionalFieldsProps> = ({
   handleSubmit,
   setPage,
 }) => (
-  <>
-    <button onClick={() => setPage(1)}>
+  <div className={styles.optionalFieldswra}>
+    <button onClick={() => setPage(1)} className={styles.back}>
       <BackArrowsvg />
     </button>
     <div className={styles.OptionalFields}>
@@ -60,7 +60,7 @@ const OptionalFields: FC<OptionalFieldsProps> = ({
         Continue
       </button>
     </div>
-  </>
+  </div>
 );
 
 export default OptionalFields;

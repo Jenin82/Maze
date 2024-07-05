@@ -27,6 +27,7 @@ const SegmentOne: FC<SegmentOneProps> = ({ role, setRole, setPage }) => {
           setPage(0);
           navigate(-1);
         }}
+        className={styles.back}
       >
         <BackArrowsvg />
       </button>

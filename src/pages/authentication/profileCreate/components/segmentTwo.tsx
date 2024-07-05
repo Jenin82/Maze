@@ -67,7 +67,7 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
   };
 
   return (
-    <>
+    <div className={styles.segmenttwowr}>
       <button onClick={() => setPage(0)}>
         <BackArrowsvg />
       </button>
@@ -150,7 +150,7 @@ const SegmentTwo: FC<SegmentTwoProps> = ({
           Continue
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
