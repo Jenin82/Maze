@@ -87,9 +87,17 @@ const IdeaCreation = () => {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
+      const ideaData = {
+        ...data,
+        owner_id: user.id,
+      };
+      if (id) {
+        ideaData.id = id;
+      }
+
       const { data: response, error: responseError } = await supabase
         .from("idea")
-        .upsert([{ ...data, owner_id: user.id, id }])
+        .upsert([ideaData])
         .select();
       if (responseError) {
         toast.error(responseError.message);

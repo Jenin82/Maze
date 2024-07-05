@@ -22,6 +22,7 @@ interface IdeaCreate {
 	title: string;
 	description: string;
 	requirements: string[];
+	id?: string;
 }
 
 interface Idea {
