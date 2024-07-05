@@ -142,7 +142,7 @@ const Idea = () => {
       {data && ideaData && (
         <div className={styles.Wrapper}>
           {data.owner_id === user && (
-            <button onClick={() => navigate(`/idea-edit/${data.id}`)}>Edit</button>
+            <button onClick={() => navigate(`/idea-edit/${data.id}`)} className={styles.editbuttonsty}>Edit</button>
           )}
           <div>
             {" "}
