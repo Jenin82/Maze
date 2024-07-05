@@ -115,7 +115,16 @@ const ProfileCreate = () => {
                 }
               );
           }
-          return roleResponse;
+        }
+        const { data: roles, error } = await supabase.rpc("get_user_roles", {
+          check_user_id: user.data.session?.user.id,
+        });
+        if (error) {
+          throw error.message;
+        } else {
+          const role = [roles[0].role_name];
+          localStorage.setItem("roles", JSON.stringify(role));
+          return data;
         }
       }
     } else {
@@ -147,7 +156,6 @@ const ProfileCreate = () => {
     toast.promise(handleCreateUser(), {
       loading: "Creating your profile...",
       success: () => {
-        localStorage.setItem("roles", JSON.stringify([role]));
         navigate(edit ? "/profile" : "/home");
         return <b>Profile update successful</b>;
       },

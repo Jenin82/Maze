@@ -78,6 +78,10 @@ function App() {
 							path: "/idea-create",
 							element: <IdeaCreation />,
 						},
+						{
+							path: "/idea-edit/:id",
+							element: <IdeaCreation />,
+						},
 					],
 				},
 			],

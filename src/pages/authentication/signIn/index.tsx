@@ -85,9 +85,7 @@ const SignIn = () => {
         if (error) {
           throw error.message;
         } else {
-          const role = roles.map(
-            (roleData: { role_name: string }) => roleData.role_name
-          );
+          const role = [roles[0].role_name];
           localStorage.setItem("roles", JSON.stringify(role));
           navigate("/home");
           return data;

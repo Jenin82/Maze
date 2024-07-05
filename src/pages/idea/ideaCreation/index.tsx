@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "../../../utils/supabase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Roles } from "../../../services/Roles";
 import styles from "./index.module.css";
 import { Topnav } from "../../../components/navbar/topnav";
@@ -9,6 +9,7 @@ import { Nabvar } from "../../../components/navbar";
 
 const IdeaCreation = () => {
   const navigate = useNavigate();
+  const { id } = useParams(); // Get the id from the URL
   const [data, setData] = useState<IdeaCreate>({
     owner_id: "",
     title: "",
@@ -37,18 +38,36 @@ const IdeaCreation = () => {
           toast.error("You are not an ideator");
           throw "You are not an ideator";
         } else {
-          let { data: idea, error: ideaError } = await supabase
-            .from("idea")
-            .select("*")
+          if (id) {
+            let { data: idea, error: ideaError } = await supabase
+              .from("idea")
+              .select("*")
+              .eq("id", id)
+              .single();
 
-            // Filters
-            .eq("owner_id", user.id);
+            if (ideaError) {
+              toast.error(ideaError.message);
+              throw ideaError.message;
+            } else if (idea) {
+              setData({
+                owner_id: idea.owner_id,
+                title: idea.title,
+                description: idea.description,
+                requirements: Array.isArray(idea.requirements)
+                  ? idea.requirements
+                  : JSON.parse(idea.requirements || "[]"),
+              });
+            }
+          } else {
+            let { data: idea, error: ideaError } = await supabase
+              .from("idea")
+              .select("*")
+              .eq("owner_id", user.id);
 
-          if (ideaError) {
-            toast.error(ideaError.message);
-            throw ideaError.message;
-          } else if (idea) {
-            if (idea.length > 0) {
+            if (ideaError) {
+              toast.error(ideaError.message);
+              throw ideaError.message;
+            } else if (idea && idea.length > 0) {
               navigate("/idea-list");
               toast.error("You already have an idea");
               throw "You already have an idea";
@@ -70,7 +89,7 @@ const IdeaCreation = () => {
     if (user) {
       const { data: response, error: responseError } = await supabase
         .from("idea")
-        .insert([{ ...data, owner_id: user.id }])
+        .upsert([{ ...data, owner_id: user.id, id }])
         .select();
       if (responseError) {
         toast.error(responseError.message);
@@ -94,7 +113,7 @@ const IdeaCreation = () => {
     toast.promise(handleIdeaCreate(), {
       loading: "Creating your idea...",
       success: () => {
-        navigate("/");
+        navigate("/idea-list");
         return <b>Idea created</b>;
       },
       error: (error) => {
@@ -112,9 +131,9 @@ const IdeaCreation = () => {
   };
 
   const handleRemoveRequirement = (index: number) => {
-    const updatedSRequirements = [...data.requirements];
-    updatedSRequirements.splice(index, 1);
-    setData({ ...data, requirements: updatedSRequirements });
+    const updatedRequirements = [...data.requirements];
+    updatedRequirements.splice(index, 1);
+    setData({ ...data, requirements: updatedRequirements });
   };
 
   return (
@@ -122,7 +141,7 @@ const IdeaCreation = () => {
       <Topnav />
       <div className={styles.Wrapper}>
         <h1>
-          Idea <span className="colorText">Creation</span>
+          Idea <span className="colorText">{id ? "Edit" : "Creation"}</span>
         </h1>
 
         <div className={styles.FormContainer}>
@@ -131,6 +150,7 @@ const IdeaCreation = () => {
             <input
               type="text"
               placeholder="Title"
+              value={data.title}
               onChange={(e) =>
                 setData({
                   ...data,
@@ -144,6 +164,7 @@ const IdeaCreation = () => {
             <p>Description</p>
             <textarea
               placeholder="Description"
+              value={data.description}
               onChange={(e) =>
                 setData({
                   ...data,
@@ -156,27 +177,33 @@ const IdeaCreation = () => {
           <div>
             <p>Requirements (optional)</p>
             <div>
-              {" "}
               <input
                 type="text"
                 placeholder="Enter requirement"
                 value={newRequirement}
                 onChange={(e) => setNewRequirement(e.target.value)}
               />
-              <button type="button" onClick={handleAddRequirement} className={styles.Addbutton}>
+              <button
+                type="button"
+                onClick={handleAddRequirement}
+                className={styles.Addbutton}
+              >
                 +
               </button>
             </div>
             <div>
-              {data.requirements.map((requirement, index) => (
-                <p key={index} onClick={() => handleRemoveRequirement(index)}>
-                  {requirement}
-                </p>
-              ))}
+              {Array.isArray(data.requirements) &&
+                data.requirements.map((requirement, index) => (
+                  <p key={index} onClick={() => handleRemoveRequirement(index)}>
+                    {requirement}
+                  </p>
+                ))}
             </div>
           </div>
         </div>
-        <button onClick={handleSubmit} className={styles.NextButton}>Continue</button>
+        <button onClick={handleSubmit} className={styles.NextButton}>
+          Continue
+        </button>
       </div>
       <Nabvar />
     </>
