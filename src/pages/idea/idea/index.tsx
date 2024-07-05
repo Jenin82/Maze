@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../../utils/supabase";
-
 import styles from "./index.module.css";
 import { Topnav } from "../../../components/navbar/topnav";
 import { Nabvar } from "../../../components/navbar";
 import { Crosssvg, Ticksvg } from "./svg";
+import { Loader } from "../../../components/loader";
 
 const Idea = () => {
   const { id } = useParams();
@@ -16,8 +16,10 @@ const Idea = () => {
   const [refresh, setRefresh] = useState(false);
   const [ideaData, setIdeaData] = useState<IdeaUserLink[]>([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
+    setIsLoading(true);
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -54,6 +56,7 @@ const Idea = () => {
         }
       }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -69,7 +72,17 @@ const Idea = () => {
       .select();
     if (contributeError) {
       if (contributeError.message.includes("duplicate key")) {
-        throw "Request already sent";
+        const { data, error } = await supabase
+          .from("idea_user_link")
+          .update({ status: "requested" })
+          .eq("idea_id", id)
+          .eq("user_id", user)
+          .select();
+        if (error) {
+          throw error.message;
+        } else if (data) {
+          return data;
+        }
       } else {
         throw contributeError.message;
       }
@@ -136,13 +149,17 @@ const Idea = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Topnav />
       {data && ideaData && (
         <div className={styles.Wrapper}>
           {data.owner_id === user && (
-            <button onClick={() => navigate(`/idea-edit/${data.id}`)}>Edit</button>
+            <button onClick={() => navigate(`/idea-edit/${data.id}`)}>
+              Edit
+            </button>
           )}
           <div>
             {" "}
