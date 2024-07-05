@@ -182,9 +182,9 @@ const IdeaCreation = () => {
               required
             />
           </div>
-          <div>
+          <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
             <p>Requirements (optional)</p>
-            <div>
+            <div style={{display:"flex",gap:"10px"}}>
               <input
                 type="text"
                 placeholder="Enter requirement"
