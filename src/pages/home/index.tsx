@@ -134,7 +134,9 @@ const Home = () => {
       <Topnav />
       {loading ? ( // Show loader if loading
         <div id="overlay">
-          <img src="/Loader.png" alt="" />
+          <img className="logo" src="/logoin.png" alt="Logo" />
+          <h1 id="rebooting"></h1>
+          <img className="bottom" src="/load.png" alt="Loading" />
         </div>
       ) : (
         <div className={styles.participants}>
