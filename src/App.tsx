@@ -15,78 +15,83 @@ import Welcome from "./pages/welcome";
 import IdeaList from "./pages/idea/ideaList";
 import Idea from "./pages/idea/idea";
 import Privacy from "./pages/privacy";
+import { LeaderboardProject } from "./pages/leaderboradProject";
 
 function App() {
 	const router = createBrowserRouter([
-		{
-			path: "*",
-			element: <NotFound />,
-		},
-		{
-			path: "/404",
-			element: <NotFound />,
-		},
-		{
-			path: "/signup",
-			element: <SignUp />,
-		},
-		{
-			path: "/signin",
-			element: <SignIn />,
-		},
-		{
-			path: "/",
-			element: <Welcome />,
-		},
-		{
-			path: "/privacy",
-			element: <Privacy />,
-		},
-		{
-			path: "/profile-create",
-			element: <ProfileCreate />,
-		},
-		{
-			path: "/",
-			element: <PrivateRoute />,
-			children: [
-				{
-					path: "/home",
-					element: <Home />,
-				},
-				{
-					path: "/profile",
-					element: <Profile />,
-				},
-				{
-					path: "/profile/:id",
-					element: <Profile />,
-				},
-				{
-					path: "/idea-list",
-					element: <IdeaList />,
-				},
-				{
-					path: "/idea/:id",
-					element: <Idea />,
-				},
-				{
-					path: "/",
-					element: <RoleChecker allowedRoles={[Roles.IDEATOR]} />,
-					children: [
-						{
-							path: "/idea-create",
-							element: <IdeaCreation />,
-						},
-						{
-							path: "/idea-edit/:id",
-							element: <IdeaCreation />,
-						},
-					],
-				},
-			],
-		},
-	]);
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+    {
+      path: "/404",
+      element: <NotFound />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
+    },
+    {
+      path: "/signin",
+      element: <SignIn />,
+    },
+    {
+      path: "/",
+      element: <Welcome />,
+    },
+    {
+      path: "/privacy",
+      element: <Privacy />,
+    },
+    {
+      path: "/profile-create",
+      element: <ProfileCreate />,
+    },
+    {
+      path: "/leaderboard",
+      element: <LeaderboardProject />,
+    },
+    {
+      path: "/",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "/home",
+          element: <Home />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/profile/:id",
+          element: <Profile />,
+        },
+        {
+          path: "/idea-list",
+          element: <IdeaList />,
+        },
+        {
+          path: "/idea/:id",
+          element: <Idea />,
+        },
+        {
+          path: "/",
+          element: <RoleChecker allowedRoles={[Roles.IDEATOR]} />,
+          children: [
+            {
+              path: "/idea-create",
+              element: <IdeaCreation />,
+            },
+            {
+              path: "/idea-edit/:id",
+              element: <IdeaCreation />,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 	return (
 		<div className="App">
 			<RouterProvider router={router} />
