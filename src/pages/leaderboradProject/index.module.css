@@ -29,9 +29,8 @@
   overflow: hidden;
 }
 
-
-.Wrapper table thead{
-    border-top-left-radius: 10px;
+.Wrapper table thead {
+  border-top-left-radius: 10px;
 }
 
 .Wrapper table thead tr {
@@ -58,7 +57,39 @@
   background-color: #ffffff; /* White color for even rows */
 }
 
+.Wrapper .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  line-height: 1;
+}
+
+.footer p {
+  font-size: 40px;
+  font-weight: 900;
+  color: rgb(173, 173, 173);
+}
+.footer svg {
+  width: 30px;
+  height: 30px;
+}
+.footer a {
+  color: #fe0000;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
 @media screen and (max-width: 500px) {
+  .footer p {
+    font-size: 8vw;
+  }
+  .footer svg {
+    width: 7vw;
+    height: 7vw;
+  }
   .Wrapper table thead tr th {
     font-size: 15px;
   }
