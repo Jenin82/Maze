@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Searchsvg } from "../../components/navbar/svg";
 import { checkImageExists } from "../../utils/imageUtils";
 import { Loader } from "../../components/loader";
+import logo from '/logoin.png'
 
 const Home = () => {
   const [refresh, setRefresh] = useState(false);
@@ -138,9 +139,10 @@ const Home = () => {
       ) : (
         <div className={styles.participants}>
           <div>
-            <h1 className={styles.infifty}>
+            <img className={styles.infiftyimg} src={logo} alt="" />
+            {/* <h1 className={styles.infifty}>
               IN<span className="colorText">50</span>HRS
-            </h1>
+            </h1> */}
             <h2>Participants</h2>
           </div>
           <div className={styles.SearchField}>

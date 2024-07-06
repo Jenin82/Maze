@@ -8,7 +8,9 @@
   font-size: 50px;
   color: #212832;
 }
-
+.Wrapper .infiftyimg{
+  width: 100%;
+}
 .participants {
   display: flex;
   flex-direction: column;

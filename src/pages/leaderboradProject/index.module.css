@@ -1,35 +1,50 @@
-.Wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 5% 10%;
-    align-items: center;
-    min-height: 100dvh;
-    overflow-y: scroll;
-    width: 100vw;
-    position: absolute;
-    left: 0;
-    top: 0;
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5% 10%;
+  align-items: center;
+  min-height: 100dvh;
+  overflow-y: scroll;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #f2f2f2;
 }
 
-.Wrapper .back{
-    align-self: flex-start;
-    background-color: transparent;
+.Wrapper .back {
+  align-self: flex-start;
+  background-color: transparent;
 }
 
-
-.Wrapper table{
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    position: relative;
+.Wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  position: relative;
+  padding: 10px 2px;
 }
 
+.Wrapper td {
+  padding: 10px 5px;
+  font-size: 16px;
+  text-align: center;
+}
 
+/* Adding alternating row colors */
+.Wrapper tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Light gray color for odd rows */
+}
 
-.Wrapper td{
+.Wrapper tr:nth-child(even) {
+  background-color: #ffffff; /* White color for even rows */
+}
+
+@media screen and (max-width: 500px) {
+  .Wrapper td {
     padding: 10px 5px;
-    font-size: 13px;
+    font-size: 13.5px;
     text-align: center;
-
+  }
 }
