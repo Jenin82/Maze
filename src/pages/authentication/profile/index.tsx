@@ -7,6 +7,7 @@ import { Nabvar } from "../../../components/navbar";
 import styles from "./index.module.css";
 import { GitHubsvg, LinkedInsvg, Twittersvg } from "./svg";
 import { CiEdit } from "react-icons/ci";
+import { Loader } from "../../../components/loader";
 
 const Profile = () => {
   const [data, setData] = useState<ProfileData>();
@@ -15,6 +16,7 @@ const Profile = () => {
   const [isValidImage, setIsValidImage] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
   const [userID, setUserID] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     const user = await supabase.auth.getSession();
@@ -53,11 +55,10 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     const { data } = supabase.storage
       .from("avatar")
-      .getPublicUrl(
-        `avatar_${id ? id : userID}.webp?timestamp=${Date.now()}`
-      );
+      .getPublicUrl(`avatar_${id ? id : userID}.webp?timestamp=${Date.now()}`);
     const imageUrl = data?.publicUrl;
     const img = new Image();
     img.src = imageUrl;
@@ -69,9 +70,12 @@ const Profile = () => {
     img.onerror = () => {
       setIsValidImage(false);
     };
+    setIsLoading(false);
   }, [data]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Topnav />
       {data && (

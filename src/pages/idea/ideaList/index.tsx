@@ -10,14 +10,17 @@ import { Clicksvg } from "../../../assets/svg";
 import { RoleCheckerFunction } from "../../../services/RoleChecker";
 import { Roles } from "../../../services/Roles";
 import { Searchsvg } from "../../../components/navbar/svg";
+import { Loader } from "../../../components/loader";
 
 const IdeaList = () => {
   const [data, setData] = useState<Idea[]>([]);
   const [user, setUser] = useState("");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const {
         data: { user },
@@ -39,6 +42,7 @@ const IdeaList = () => {
     } catch (error: any) {
       toast.error(error.message);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -64,7 +68,7 @@ const IdeaList = () => {
           .update({ voted: voteType === "like" })
           .eq("id", existingVote[0].id);
       } else {
-        // Insert new vote
+        // Insert nLoadingew vote
         await supabase.from("idea_user_link").insert({
           user_id: user,
           idea_id: ideaId,
@@ -86,7 +90,9 @@ const IdeaList = () => {
     return userVote ? userVote.voted === (voteType === "like") : false;
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Topnav />
       <div className={styles.Wrapper}>
