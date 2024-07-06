@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import { supabase } from "../../utils/supabase";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Nabvar } from "../../components/navbar";
 
 export const LeaderboardProject = () => {
   const [data, setData] = useState<any[]>([]);
@@ -34,7 +35,7 @@ export const LeaderboardProject = () => {
           <tr>
             <th>Rank</th>
             <th>Title</th>
-            <th>Favor Score</th>
+            <th>Rating</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@ export const LeaderboardProject = () => {
           ))}
         </tbody>
       </table>
+      <Nabvar />
     </div>
   );
 };

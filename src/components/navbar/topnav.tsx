@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styles from "./navbar.module.css";
 
-import { Logosvg } from "./svg";
+import { Leaderboardsvg, Logosvg } from "./svg";
 import { useNavigate } from "react-router-dom";
 import { useReactPath } from "./path.hook";
 
@@ -22,6 +22,7 @@ export const Topnav = (_props: Props) => {
       <button onClick={() => handleNavigation("/home")}>
         <Logosvg />
       </button>
+      <button onClick={()=>navigate("/leaderboard")}><Leaderboardsvg /></button>
     </div>
   );
 };

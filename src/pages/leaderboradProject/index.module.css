@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 5% 10%;
+  padding: 5% 10% 80px;
   align-items: center;
   min-height: 100dvh;
   overflow-y: scroll;
@@ -24,8 +24,25 @@
   text-align: center;
   position: relative;
   padding: 10px 2px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
 }
 
+
+.Wrapper table thead{
+    border-top-left-radius: 10px;
+}
+
+.Wrapper table thead tr {
+  background-color: #fe0000 !important;
+  color: white;
+}
+
+.Wrapper table thead tr th {
+  padding: 8px;
+  font-size: 20px;
+}
 .Wrapper td {
   padding: 10px 5px;
   font-size: 16px;
@@ -42,6 +59,9 @@
 }
 
 @media screen and (max-width: 500px) {
+  .Wrapper table thead tr th {
+    font-size: 15px;
+  }
   .Wrapper td {
     padding: 10px 5px;
     font-size: 13.5px;
