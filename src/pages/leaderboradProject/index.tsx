@@ -1,89 +1,50 @@
+import { useEffect, useState } from "react";
 import { BackArrowsvg } from "../../assets/svg";
 import styles from "./index.module.css";
+import { supabase } from "../../utils/supabase";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-type Props = {};
+export const LeaderboardProject = () => {
+  const [data, setData] = useState<any[]>([]);
+  const naviagte = useNavigate();
 
-export const LeaderboardProject = (_props: Props) => {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const { data, error } = await supabase.rpc("get_idea_vote_diff");
+    if (error) {
+      toast.error(error.message);
+      throw error;
+    } else if (data) {
+      setData(data);
+    }
+  };
+
   return (
     <div className={styles.Wrapper}>
-      <button className={styles.back}>
+      <button className={styles.back} onClick={() => naviagte("/home")}>
         <BackArrowsvg />
       </button>
       <h1>Idea Leaderboard</h1>
       <table>
         <thead>
           <tr>
-            <th>Sl. No</th>
-            <th>Name</th>
-            <th>Team</th>
+            <th>Rank</th>
+            <th>Title</th>
+            <th>Favor Score</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Amal</td>
-            <td>Blhhha</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>{" "}
-          <tr>
-            <td>1</td>
-            <td>Amalhtehgoghe grnroren kdjbdkssdc sd</td>
-            <td>Blhhha dvoisvn csnsn</td>
-          </tr>
+          {data.map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
+              <td>{item.title}</td>
+              <td>{item.vote_diff}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
